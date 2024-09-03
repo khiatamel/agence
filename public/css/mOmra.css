@@ -1,0 +1,470 @@
+
+/*Style css*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  body {
+    background-size: cover; /* Ou 'contain' */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Évite la répétition de l'image */
+    }
+
+  html, body {
+    height: 100%;/* S’assure que le body prend toute la hauteur */
+    
+    margin: 0; /* Évite les marges par défaut */
+}
+
+    /* Reset les marges et les paddings */
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style de la navbar */
+.navbar {
+  margin-bottom: -150px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Espacement entre le logo et le menu */
+  align-items: center; /* Centre verticalement les éléments */
+  background-color: #2e708100; /* Couleur de fond bleue */
+  ; /* Couleur de fond de la navbar */
+  padding: 20px 40px; /* Espacement interne */
+}
+
+
+/* Style du logo */
+.navbar-logo img {
+  margin-top: -30px;
+  height: 100px; /* Ajustez la hauteur du logo selon vos besoins */
+}
+
+/* Style du button */
+.navbar-Sing button {
+  margin-bottom: 50px;
+  height: 40px; /* Ajustez la hauteur selon vos besoins */
+  padding: 10px 20px;
+  background-color: #2e7081; /* Couleur de fond bleue */
+  color: #fff; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 20px; /* Coins arrondis */
+  font-size: 16px; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  cursor: pointer; /* Curseur en mode pointer */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition douce pour le survol */
+}
+
+.navbar-Sing button:hover {
+  background-color: #2e7081; /* Couleur de fond plus foncée au survol */
+  transform: scale(1.05); /* Légère augmentation de la taille au survol */
+}
+
+.navbar-Sing button:active {
+  transform: scale(0.98); /* Réduction légère de la taille lors du clic */
+}
+
+
+/* Style du menu */
+.navbar-menu ul {
+  padding-bottom: 50px;
+  list-style: none; /* Supprime les puces de la liste */
+  display: flex; /* Affiche les éléments de menu en ligne */
+}
+
+.navbar-menu li {
+  margin-right: 30px; /* Espacement entre les éléments de menu */
+}
+
+.navbar-menu a {
+  align-content: center;
+  color: #16545f; /* Couleur du texte des liens */
+  text-decoration: none; /* Supprime le soulignement des liens */
+  font-weight: bold; /* Met le texte en gras */
+}
+
+.navbar-menu a:hover {
+  color: #fca311; /* Couleur du texte au survol */
+}
+
+
+/* Style des popups */
+.popup {
+  display: none; /* Masqué par défaut */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+}
+
+.popup-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  max-width: 300px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.popup h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.popup form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+}
+
+.popup form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2e7081;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.popup form button:hover {
+  background-color: #2e7081;
+}
+.header-with-image {
+  display: flex; /* Utiliser Flexbox pour aligner les éléments en ligne */
+  align-items: center; /* Aligner verticalement l'image et le texte */
+}
+
+.signup-image, .login-image { /* Applique le même style aux deux images */
+  width: 90px;
+  height: auto;
+}
+
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container {
+    animation: fadeInUp 1s ease-out; /* Apply the animation to the card container */
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Stack the title and button vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    width: 100%;
+    z-index: 0;
+    text-align: center; /* Center text inside the container */
+}
+
+
+.card__container {
+  position: relative;
+  width: 95%;
+  margin-top: 100px;
+  border-radius: 30px;
+  height: auto; /* Allows the height to adjust based on content */
+  max-height: 520px; /* Set a maximum height if needed */
+  overflow: hidden; /* Ensures content that exceeds the height will be hidden */
+}
+
+.card__background {
+    position: relative;
+}
+
+.card__img {
+    width: 100%;
+    height: auto;
+    border-radius: 1.5rem;
+    object-fit: cover;
+}
+
+.card__content {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a background to make text more readable */
+    padding: 20px;
+    border-radius: 1.5rem;
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Stack the title and button vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center;
+    width: 60%;
+}
+
+.card__title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.card__button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #fca311;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card__button:hover {
+    background-color: #e89f00;
+}
+
+h4 {
+    margin: 10px 0; /* Add space between h4 elements */
+}
+
+  
+  /*///////////////////////////////////////////////HOTEL//////////////////////////////////////////////////////////////////////*/
+  /* Title styling */
+.titre {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.titre h1 {
+  font-size: 2.5rem;
+  color: #2e7081;
+  font-weight: bold;
+}
+.animated-section { 
+  box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-start; /* Align items at the start to remove space */
+  align-items: center;
+  width: 90%;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 1s ease-out forwards;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border-radius: 30px;
+  height: auto;
+  max-height: 450px;
+  overflow: hidden;
+  padding: 0; /* Ensure no padding is added */
+}
+
+.slider-container {   
+  margin: 0px;
+  padding: 0px;
+  width: 50%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  border-radius: 30px;
+}
+
+.section-image {
+    width: 100%;
+    flex-shrink: 0;
+    animation: sliderAnimation 25s infinite;
+}
+.section-description {
+  background-image: url('../images/cp1.png');
+  margin: 0; /* Remove any margins */
+  padding: 0; /* Remove any padding */
+  height: 390px;
+  background-size: contain; /* Scale the image to cover the entire container */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  display: flex; /* Enable Flexbox */
+  flex-direction: column; /* Stack the title and button vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text inside the container */
+  width: 50%; /* Ensure the container takes up half of its parent */
+}
+
+.section-description div {
+  justify-content: end;
+  display: flex; /* Use flexbox to align the content */
+  margin-bottom: 5px; /* Add spacing between rows */
+}
+
+.section-description h4 {
+  font-size: medium; /* Adjust the size of text */
+  margin: 0; /* Remove any default margins */
+  margin-right: 20px;
+}
+
+.section-description h2 {
+  color: #fca311;
+  margin: 0; /* Remove any default margins */
+  margin-right: 20px;
+}
+
+.card__button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color:#2e7081; /* Button background color */
+  border: none;
+  color: #fff; /* Button text color */
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Add space above the button */
+  text-align: center;
+}
+
+.card__button:hover {
+  background-color: #fca311; /* Change button color on hover */
+}
+
+.note-section {
+  position: absolute; /* Position it within the parent container */
+  bottom: 0; /* Align to the bottom */
+  right: 0; /* Align to the right */
+  padding: 15px; /* Padding inside the note section */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #00000054; /* Light background color */
+  width: 180px; /* Fixed width */
+  z-index: 10; /* Ensure it appears above other elements */
+  display: flex; /* Enable Flexbox for horizontal alignment */
+  flex-direction: column; /* Arrange items in a column */
+  gap: 5px; /* Add spacing between rows */
+}
+
+.note-row {
+  display: flex; /* Enable Flexbox for horizontal alignment */
+  justify-content: space-between; /* Distribute space between elements */
+  align-items: center; /* Align items vertically */
+}
+
+.note-section h6 {
+  text-align: end;
+  font-size: small;
+  margin: 0; /* Remove default margins */
+  white-space: nowrap; /* Prevent text from breaking to the next line */
+}
+
+
+
+@keyframes sliderAnimation {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-100%); }
+    40% { transform: translateX(-200%); }
+    60% { transform: translateX(-300%); }
+    80% { transform: translateX(-400%); }
+    100% { transform: translateX(-500%); } /* Adjust this based on the number of images */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* General popup styling */
+.pop {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+
+.pop-content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%; /* Adjust width to fit better on smaller screens */
+  max-width: 500px; /* Limit width on larger screens */
+  max-height: 90vh; /* Maximum height of 90% of viewport height */
+  overflow-y: auto; /* Add vertical scroll if content exceeds max-height */
+  position: absolute; /* Absolute positioning to center the popup */
+  top: 50%; /* Position the popup from the top */
+  left: 50%; /* Position the popup from the left */
+  transform: translate(-50%, -50%); /* Translate by 50% of its width and height to center */
+  border-radius: 8px; /* Rounded corners */
+}
+
+
+
+/* Centered title */
+.pop-content h2 {
+  text-align: center;
+  color: #2e7081;
+}
+
+/* Label styling */
+.pop-content label {
+  display: block; /* Display labels as block elements */
+  margin-bottom: 5px; /* Space below each label */
+  font-weight: bold; /* Make labels bold */
+}
+
+/* Container for the button */
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+}
+
+/* Button styling */
+.pop-content button {
+  padding: 10px 20px;
+  background-color: #2e7081; /* Button background color */
+  border: none;
+  color: #fff; /* Button text color */
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Space above the button */
+}
+
+/* Input fields styling */
+input {
+  width: 100%; /* Full width of container */
+  padding: 10px; /* Add some padding inside the input */
+  border: 1px solid #000000; /* Border around inputs */
+  border-radius: 4px; /* Rounded corners for inputs */
+  margin-bottom: 15px; /* Space below each input */
+  box-sizing: border-box;
+}
+
+/* Adjust label margin */
+.popup-content label {
+  margin-top: 10px;
+}

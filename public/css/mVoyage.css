@@ -1,0 +1,751 @@
+/*Style css*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  body {
+    background-size: cover; /* Ou 'contain' */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Évite la répétition de l'image */
+    background-attachment: fixed; /* L'image reste fixe */
+    }
+  
+  html, body {
+    height: 100%;/* S’assure que le body prend toute la hauteur */
+    margin: 0; /* Évite les marges par défaut */
+  }
+  
+    /* Reset les marges et les paddings */
+  body, ul {
+  margin: 0;
+  padding: 0;
+  }
+  
+  /* Style de la navbar */
+  .navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Espacement entre le logo et le menu */
+  align-items: center; /* Centre verticalement les éléments */
+  background-color: #2e708100; /* Couleur de fond bleue */
+  ; /* Couleur de fond de la navbar */
+  padding-left: 40px; /* Espacement interne */
+  padding-right: 40px;
+  }
+  
+  
+  /* Style du logo */
+  .navbar-logo img {
+    margin: 0;
+    padding: 0;
+    height: 100px; /* Ajustez la hauteur du logo selon vos besoins */
+  }
+  
+  /* Style du button */
+  .navbar-Sing button {
+  height: 40px; /* Ajustez la hauteur selon vos besoins */
+  padding: 10px 20px;
+  background-color: #2e7081; /* Couleur de fond bleue */
+  color: #fff; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 20px; /* Coins arrondis */
+  font-size: 16px; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  cursor: pointer; /* Curseur en mode pointer */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition douce pour le survol */
+  }
+  
+  .navbar-Sing button:hover {
+  background-color: #2e7081; /* Couleur de fond plus foncée au survol */
+  transform: scale(1.05); /* Légère augmentation de la taille au survol */
+  }
+  
+  .navbar-Sing button:active {
+  transform: scale(0.98); /* Réduction légère de la taille lors du clic */
+  }
+  
+  
+  /* Style du menu */
+  .navbar-menu ul {
+  list-style: none; /* Supprime les puces de la liste */
+  display: flex; /* Affiche les éléments de menu en ligne */
+  }
+  
+  .navbar-menu li {
+  margin-right: 30px; /* Espacement entre les éléments de menu */
+  }
+  
+  .navbar-menu a {
+  align-content: center;
+  color: #16545f; /* Couleur du texte des liens */
+  text-decoration: none; /* Supprime le soulignement des liens */
+  font-weight: bold; /* Met le texte en gras */
+  }
+  
+  .navbar-menu a:hover {
+  color: #ffffff; /* Couleur du texte au survol */
+  }
+  
+  
+  /* Style des popups */
+  .popup {
+  display: none; /* Masqué par défaut */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  }
+  
+  .popup-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  max-width: 300px;
+  }
+  
+  .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  }
+  
+  .popup h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  }
+  
+  .popup form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  }
+  
+  .popup form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2e7081;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  }
+  
+  .popup form button:hover {
+  background-color: #2e7081;
+  }
+  .header-with-image {
+  display: flex; /* Utiliser Flexbox pour aligner les éléments en ligne */
+  align-items: center; /* Aligner verticalement l'image et le texte */
+  }
+  
+  .signup-image, .login-image { /* Applique le même style aux deux images */
+  width: 90px;
+  height: auto;
+  }
+  
+  /*----------------container------------------*/
+ /* Trip Container Styles */
+
+.trip-container {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.39);
+    max-width: 95%;
+    margin: 30px auto;
+    overflow: hidden;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.trip-header {
+    position: relative;
+}
+
+.trip-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    animation: zoomIn 1s ease-in-out;
+}
+
+.trip-description {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 8px;
+    animation: slideInLeft 1s ease-in-out;
+}
+
+.trip-description h2 {
+    margin-bottom: 10px;
+}
+
+.tab-container {
+    max-width: 90%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background-color: #2e7081;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 15px;
+    background-color: #2e7081;
+    font-weight: 500;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.tab-button.active {
+    background-color: #0c4650;
+}
+
+.tab-button:hover {
+    background-color: #aaa;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+/*----------------présentation-----------------*/
+.presentation-section {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f7f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.trip-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff; /* Optionnel: améliore la visibilité */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trip-details h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.trip-details ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.trip-details ul li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #34495e;
+    margin-left: 20px;
+}
+
+.date-label {
+    font-size: 18px;
+    color: #34495e;
+    padding: 8px 25px;
+    margin-right: 50px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+    border: 1px solid #bdc3c7;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.date-label:hover {
+    background-color: #dfe6e9;
+    border-color: #aab7c4;
+}
+
+.reserve-btn {
+    padding: 8px 16px;
+    background-color: #2e7081;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reserve-btn:hover {
+    background-color: #1e4d59;
+}
+
+.trip-details ul li i {
+    font-size: 20px;
+    color: #000;
+    margin-right: 10px; /* Espacement entre l'icône et le texte */
+}
+
+
+
+        /* Programme Section */
+        .programme-section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f7f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+        }
+
+        .programme-section h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .programme-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .programme-section ul li {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #34495e;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .programme-section ul li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-size: 18px;
+        }
+    
+        /* Tarif Section */
+        
+
+        .hotels-container {
+            padding: 20px;
+        }
+        
+        .hotels-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2e7081;
+        }
+        
+        .hotel-cards {
+            background-color: #f7f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        
+        
+        .hotel-cards img {
+            width: 40%;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        
+        .hotel-cards:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hotel-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .hotel-card p {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+        
+        .hotel-card ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 0;
+        }
+        
+        .hotel-card ul li {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #34495e;
+            position: relative;
+            padding-left: 20px;
+        }        
+        
+        .hotel-card ul li:before {
+            content: "•";
+            color: #0c4650;
+            font-weight: bold;
+            display: inline-block;
+            width: 1rem;
+            margin-left: -1rem;
+        }
+        
+/* Popup styling hotels */
+.pop {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.pop-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.pop-content h3{
+    color: #2e7081;
+}
+.prix {
+    margin-left: 30px;
+}
+
+.clos {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.clos:hover, .clos:focus {
+    color: black;
+}
+
+.open-pop-btn {
+    background-color: #16545f;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 80px;
+}
+
+.open-pop-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0%, 100%, 20%, 50%, 80% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes bounceInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+
+/*-----------------------------------image----------------------------------------*/
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contain {
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+}
+
+.card {
+    width: 80px;
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    transition: .6s cubic-bezier(.28,-0.03,0,.99);
+    box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+}
+
+.card > .row {
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.card > .row > .icon {
+    background: #223;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.card > .row > .description {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: 80px;
+    width: 520px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition-delay: .3s;
+    transition: all .3s ease;
+}
+
+.description p {
+    color: #b0b0ba;
+    padding-top: 5px;
+}
+
+.description h4 {
+    text-transform: uppercase;
+}
+
+input:checked + label {
+    width: 600px;
+}
+
+input:checked + label .description {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.card[for="c1"] {
+    background-image: url('../images/t1.jpg');
+}
+.card[for="c2"] {
+    background-image: url('../images/t2.jpeg');
+}
+.card[for="c3"] {
+    background-image: url('../images/t3.jpeg');
+}
+.card[for="c4"] {
+    background-image: url('../images/t4.jpeg');
+}
+
+
+
+/* General popup styling */
+.pop {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  
+  .pop-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Adjust width to fit better on smaller screens */
+    max-width: 500px; /* Limit width on larger screens */
+    max-height: 90vh; /* Maximum height of 90% of viewport height */
+    overflow-y: auto; /* Add vertical scroll if content exceeds max-height */
+    position: absolute; /* Absolute positioning to center the popup */
+    top: 20%;
+    left: 50%; /* Position the popup from the left */
+    transform: translate(-50%, -50%); /* Translate by 50% of its width and height to center */
+    border-radius: 8px; /* Rounded corners */
+  }
+  
+  
+  
+  /* Centered title */
+  .pop-content h2 {
+    text-align: center;
+    color: #2e7081;
+  }
+  
+  /* Label styling */
+  .pop-content label {
+    display: block; /* Display labels as block elements */
+    margin-bottom: 5px; /* Space below each label */
+    font-weight: bold; /* Make labels bold */
+  }
+  
+  /* Container for the button */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+  }
+  
+  /* Button styling */
+  .pop-content button {
+    padding: 10px 20px;
+    background-color: #2e7081; /* Button background color */
+    border: none;
+    color: #fff; /* Button text color */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Space above the button */
+  }
+  
+  /* Input fields styling */
+  input ,select{
+    width: 100%; /* Full width of container */
+    padding: 10px; /* Add some padding inside the input */
+    border: 1px solid #000000; /* Border around inputs */
+    border-radius: 4px; /* Rounded corners for inputs */
+    margin-bottom: 15px; /* Space below each input */
+    box-sizing: border-box;
+  }
+  
+  /* Adjust label margin */
+  .popup-content label {
+    margin-top: 10px;
+  }
+  

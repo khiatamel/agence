@@ -1,0 +1,359 @@
+/*Style css*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  body {
+    background-image: url('../images/nixe.JPG');
+    background-size: cover; /* Ou 'contain' */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Évite la répétition de l'image */
+    background-attachment: fixed; /* L'image reste fixe */
+    }
+  
+  html, body {
+    height: 100%;/* S’assure que le body prend toute la hauteur */
+    margin: 0; /* Évite les marges par défaut */
+  }
+  
+    /* Reset les marges et les paddings */
+  body, ul {
+  margin: 0;
+  padding: 0;
+  }
+  
+  /* Style de la navbar */
+  .navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Espacement entre le logo et le menu */
+  align-items: center; /* Centre verticalement les éléments */
+  background-color: #2e708100; /* Couleur de fond bleue */
+  ; /* Couleur de fond de la navbar */
+  padding-left: 40px; /* Espacement interne */
+  padding-right: 40px;
+  }
+  
+  
+  /* Style du logo */
+  .navbar-logo img {
+    margin: 0;
+    padding: 0;
+    height: 100px; /* Ajustez la hauteur du logo selon vos besoins */
+  }
+  
+  /* Style du button */
+  .navbar-Sing button {
+  height: 40px; /* Ajustez la hauteur selon vos besoins */
+  padding: 10px 20px;
+  background-color: #2e7081; /* Couleur de fond bleue */
+  color: #fff; /* Couleur du texte en blanc */
+  border: none; /* Pas de bordure */
+  border-radius: 20px; /* Coins arrondis */
+  font-size: 16px; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  cursor: pointer; /* Curseur en mode pointer */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition douce pour le survol */
+  }
+  
+  .navbar-Sing button:hover {
+  background-color: #2e7081; /* Couleur de fond plus foncée au survol */
+  transform: scale(1.05); /* Légère augmentation de la taille au survol */
+  }
+  
+  .navbar-Sing button:active {
+  transform: scale(0.98); /* Réduction légère de la taille lors du clic */
+  }
+  
+  
+  /* Style du menu */
+  .navbar-menu ul {
+  list-style: none; /* Supprime les puces de la liste */
+  display: flex; /* Affiche les éléments de menu en ligne */
+  }
+  
+  .navbar-menu li {
+  margin-right: 30px; /* Espacement entre les éléments de menu */
+  }
+  
+  .navbar-menu a {
+  align-content: center;
+  color: #16545f; /* Couleur du texte des liens */
+  text-decoration: none; /* Supprime le soulignement des liens */
+  font-weight: bold; /* Met le texte en gras */
+  }
+  
+  .navbar-menu a:hover {
+  color: #ffffff; /* Couleur du texte au survol */
+  }
+  
+  
+  /* Style des popups */
+  .popup {
+  display: none; /* Masqué par défaut */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  }
+  
+  .popup-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 30px;
+  width: 80%;
+  max-width: 300px;
+  }
+  
+  .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  }
+  
+  .popup h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  }
+  
+  .popup form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  }
+  
+  .popup form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2e7081;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  }
+  
+  .popup form button:hover {
+  background-color: #2e7081;
+  }
+  .header-with-image {
+  display: flex; /* Utiliser Flexbox pour aligner les éléments en ligne */
+  align-items: center; /* Aligner verticalement l'image et le texte */
+  }
+  
+  .signup-image, .login-image { /* Applique le même style aux deux images */
+  width: 90px;
+  height: auto;
+  }
+
+/*---------------------Formulaire-------------------------*/
+.titre {
+    text-align: center;
+    margin-top: -30px;
+  }
+  
+  .titre h1 {
+    font-size: 2.9rem;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px #2e7081;
+  }
+
+
+  .container {
+    max-width: 700px; /* Limite la largeur de chaque conteneur */
+    margin: 20px auto; /* Centre les conteneurs horizontalement avec un espacement vertical */
+    background-color: rgba(0, 0, 0, 0.568); /* Fond blanc semi-transparent */
+    padding-left: 20px; /* Espacement intérieur */
+    padding-right: 20px;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Ombre légère */
+    margin-right: 50px; /* Espace à gauche pour aligner les conteneurs à gauche */
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.form-title{
+    font-size: 26px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 6px;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    border-bottom: solid 1px rgb(0, 0, 0);
+}
+
+.main-user-info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.user-input-box:nth-child(2n){
+    justify-content: end;
+}
+
+.user-input-box{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    padding-bottom: 15px;
+}
+
+.user-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-input label{
+    width: 95%;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: 200;
+    margin: 5px 0;
+}
+
+.user-input select{
+    height: 40px;
+    width: 95%;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid grey;
+    padding: 0 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    width: 45%; /* Ajustez selon vos besoins */
+}
+
+.user-input-box label{
+    width: 95%;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.user-input-box input{
+    height: 40px;
+    width: 95%;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid grey;
+    padding: 0 10px;
+}
+
+
+.user-input-box select{
+    height: 40px;
+    width: 95%;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid grey;
+    padding: 0 10px;
+}
+
+
+.form-submit-btn{
+    margin-top: 20px;
+}
+
+.form-submit-btn input{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    color:rgb(0, 0, 0);
+    font-size: 20px;
+    padding: 10px;
+    border:none;
+    border-radius: 10px;
+    background-color: #2e7081;
+}
+
+.form-submit-btn input:hover{
+    background: #fca311;
+    color: rgb(8, 8, 8);
+}
+
+.gender-category{
+    margin: 20px 0;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: large;
+}
+
+.gender-title{
+    color:#fca311;
+    text-shadow: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.gender-category label{
+    padding: 0 20px 0 5px;
+}
+
+.gender-category label,
+.gender-category input,
+.form-submit-btn input{
+    cursor: pointer;
+}
+
+
+@media(max-width: 600px){
+    .container{
+        min-width: 280px;
+    }
+
+    .user-input-box{
+        margin-bottom: 12px;
+        width: 100%;
+    }
+
+    .user-input-box:nth-child(2n){
+        justify-content: space-between;
+    }
+
+
+    .main-user-info{
+        max-height: 380px;
+        overflow: auto;
+    }
+
+    .main-user-info::-webkit-scrollbar{
+        width: 0;
+    }
+}
+
+/* Flexbox container for three inputs */
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.input-row .user-input-box {
+    width: 32%; /* Adjust to fit three inputs in a row */
+}
