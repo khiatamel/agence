@@ -32,7 +32,7 @@
     flex-direction: column;
     justify-content: center; /* Centers content vertically */
     align-items: center; /* Centers content horizontally */
-    background-image: url('../images/home.png'); /* Your background image */
+    background-image: url('../images/dashboard.png'); /* Your background image */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -141,48 +141,101 @@
           <li><a href="{{ route('billet')}}">Billet</a></li>
         </ul>
       </nav>
-      <div class="navbar-Sing">
-        <button id="signupBtn">S'inscrire</button>
-        <button id="loginBtn">Se connecter</button>
-      </div>
+      <!-- Autres éléments de navigation -->
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+        </div>
+      @endif
+        <div class="navbar-sing">
+        <ul class="navbar-men">
+        @auth
+            <li class="navbar-item">
+                Bonjour, {{ Auth::user()->name }}! 
+                <a href="{{ route('logout') }}" class="navbar-link logout-link" 
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Déconnexion
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        @else
+            <li id="signupBtn" class="navbar-item">
+                <a  class="navbar-link">Inscription</a>
+            </li>
+            <li id="loginBtn" class="navbar-item">
+                <a class="navbar-link">Connexion</a>
+            </li>
+        @endauth
+    </ul>
+</div>
+
     </header>
    
         <!-- Background image content or overlay if needed -->
     </div>
 </div>
-   <!-- Popup Inscrire -->
+ <!-- Popup Inscrire -->
 <div id="signupPopup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('signupPopup')">&times;</span>
-    <div class="header-with-image">
-      <img src="{{ asset('images/l.png') }}" alt="Logo de l'entreprise" class="signup-image">
-      <h2>Inscription</h2>
-      
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('signupPopup')">&times;</span>
+        <div class="header-with-image">
+            <img src="{{ asset('images/l.png') }}" alt="Logo de l'entreprise" class="signup-image">
+            <h2>Inscription</h2>
+        </div>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div>
+                <input id="name" type="text" name="name" placeholder="Nom complet" value="{{ old('name') }}" required autofocus>
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
+            <div>
+                <input id="phone" type="text" name="phone" placeholder="Numéro téléphone" value="{{ old('phone') }}" required>
+                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            </div>
+            <div>
+                <input id="password" type="password" name="password" placeholder="Mot de passe" required autocomplete="new-password">
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+            <div>
+                <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Confirmer mot de passe" required autocomplete="new-password">
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            </div>
+            <button type="submit">S'inscrire</button>
+        </form>
     </div>
-    <form>
-      <input type="text" placeholder="Nom d'utilisateur" required>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Mot de passe" required>
-      <button type="submit">S'inscrire</button>
-    </form>
-   </div>
 </div>
 
-    <!-- Popup Connecter -->
+<!-- Popup Connecter -->
 <div id="loginPopup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('loginPopup')">&times;</span>
-    <div class="header-with-image">
-      <h2 >Connexion</h2>
-      <img src="{{ asset('images/f.png') }}" alt="Logo de l'entreprise" class="login-image">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('loginPopup')">&times;</span>
+        <div class="header-with-image">
+            <h2>Connexion</h2>
+            <img src="{{ asset('images/f.png') }}" alt="Logo de l'entreprise" class="login-image">
+        </div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div>
+                <input id="phone" type="text" name="phone" placeholder="Numéro téléphone" value="{{ old('phone') }}" required autofocus>
+                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            </div>
+            <div>
+                <input id="password" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password">
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+            <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
+            <button type="submit">Se connecter</button>
+        </form>
     </div>
-    <form>
-      <input type="text" placeholder="Nom d'utilisateur ou Email" required>
-      <input type="password" placeholder="Mot de passe" required>
-      <button type="submit">Se connecter</button>
-    </form>
-  </div>
 </div>
+
+
 
 <!-- Footer -->
 <footer class="site-footer">

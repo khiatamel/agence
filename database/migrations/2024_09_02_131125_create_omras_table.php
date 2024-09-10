@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('type');
             $table->date('depart');
             $table->date('retour');
-            $table->number('place');
-            $table->number('saison');
+            $table->integer('place');
+            $table->integer('saison');
+            $table->string('photo');
+            $table->string('compagne');
         });
     }
 

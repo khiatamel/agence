@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class omra extends Model
 {
     use HasFactory;
+
+    protected $table = 'omras';
+
+    protected $fillable = [
+        'nom',
+        'type',
+        'depart',
+        'retour',
+        'place',
+        'saison',
+        'compagne',
+        'photo',
+    ];
 }

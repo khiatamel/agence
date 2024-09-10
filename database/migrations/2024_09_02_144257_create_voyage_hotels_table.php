@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('voyage_hotels', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('voyage');
-            $table->integer('hotel');
-            $table->foreign('voyage')->references('id')->on('voyage_organises')->onDelete('cascade');
-            $table->foreign('hotel')->references('nom')->on('hotels')->onDelete('cascade');
+            $table->unsignedBigInteger('voyageID');
+            $table->unsignedBigInteger('hotelID');
+            $table->foreign('voyageID')->references('id')->on('voyage_organises')->onDelete('cascade');
+            $table->foreign('hotelID')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
 

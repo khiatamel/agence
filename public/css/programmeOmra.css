@@ -1,0 +1,266 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.topbar .user {
+    font-size: 18px;
+    font-weight: bold;
+    list-style: none;
+}
+
+/* Details Section */
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+}
+
+.table__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.table__header h1 {
+    font-size: 24px;
+    color: #2e7081;
+}
+
+.table__header .input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.table__header .input-group input {
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.table__body {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table__body table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+}
+
+.table__body th,
+.table__body td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.table__body th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.table__body td {
+    color: #555;
+}
+
+/* Action Buttons */
+.table__body td a {
+    color: #2e7081;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.table__body td a:hover {
+    color: #1f5163;
+}
+
+.table__body td form button {
+    background-color: transparent;
+    border: none;
+    color: #d9534f;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Form Section */
+.recentCustomers {
+    width: auto;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    right: 0;
+}
+
+.cardHeader h3 {
+    font-size: 22px;
+    color: #2e7081;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.main-user-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.user-input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-input-box label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.user-input-box input,
+.user-input-box select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-submit-btn {
+    grid-column: span 2;
+    text-align: center;
+}
+
+.form-submit-btn button {
+    background-color: #2e7081;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-submit-btn button:hover {
+    background-color: #245564;
+}
+
+/* Hide form initially */
+.slide-toggle {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+
+/* When active, expand the form */
+.slide-toggle.active {
+    max-height: 1000px; /* Adjust according to the form's height */
+}
+
+/* Style the toggle button */
+.toggle-form-btn {
+    background-color: #2e7081;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.toggle-form-btn:hover {
+    background-color: #1f5163;
+}
+
+/* Form Container */
+.form-container {
+    display: none; /* Initially hidden */
+    max-height: 80vh; /* Adjust as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    transition: max-height 0.5s ease-out;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Change position if needed */
+    right: 10px;
+    width: 40%;
+}
+
+/* When the form is visible */
+.form-container.show {
+    display: block;
+    max-height: 80vh; /* Adjust based on form content height */
+}
+
+/*//////////////////////////////////////////////POPUP/////////////////////////////////*/
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 0 auto;  /* Center horizontally */
+    padding: 20px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    top: 10px;  /* Aligns the modal content to the top */
+    border-radius: 10px;
+}
+
+.close {
+    top: 0;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

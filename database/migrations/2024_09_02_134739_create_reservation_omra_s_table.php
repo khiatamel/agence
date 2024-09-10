@@ -16,13 +16,13 @@ return new class extends Migration
             $table->timestamps();
             $table->string('group_name')->nullable();
             $table->string('nom');
-            $table->number('numero');
-            $table->file('passeport');
-            $table->file('photo');
-            $table->number('age');
+            $table->string('numero');
+            $table->string('passeport');
+            $table->string('photo');
+            $table->integer('age');
             $table->string('statut');
-            $table->string('omra');
-            $table->foreign('omra')->references('omra')->on('omra_hotels')->onDelete('cascade');
+            $table->unsignedBigInteger('omraID');
+            $table->foreign('omraID')->references('id')->on('omra_hotels')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservation_o_s');
+        Schema::dropIfExists('reservation_omras');
     }
 };

@@ -75,15 +75,19 @@
 					<span class="title">billet</span>
 				</a>
 		</li>
-	<li>
-				<a href="#">
+	    <li>
+				<a href="{{ route('logout') }}" class="navbar-link logout-link" 
+                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
 					<span class="title">Sign Out</span>
 				</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
 		</li>
 
 		</ul>
-		</div>
+	</div>
 
 <div class="main">
 	<div class="topbar">
@@ -97,8 +101,10 @@
 			</label>
 		</div>
 		<div class="user">
-			<img src="https://randomuser.me/api/portraits/men/79.jpg" alt="userimage">
-		</div>
+            <li class="navbar-item">
+                Admin : {{ Auth::user()->name }}     
+            </li>
+      </div>
 	</div>
 
 <div class="details">

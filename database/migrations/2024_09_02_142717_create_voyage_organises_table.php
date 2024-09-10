@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('transport');
             $table->string('destination');
-            $tabla->date('depart');
+            $table->date('depart');
             $table->date('retour');
-            $table->file('photo');
+            $table->string('photo');
         });
     }
 

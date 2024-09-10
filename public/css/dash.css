@@ -142,6 +142,15 @@ font-size: 25px;
 		}
 
 /* ---------------------main------------------- */
+.navbar-item{
+	color: rgb(255, 187, 0);
+	text-shadow: 2px 2px 2px #000;
+	font-weight: 600;
+	list-style: none;
+	text-underline-position: var(--black1);
+	padding: 20px;
+  }
+
 .main{
 	position: absolute;
 	width: calc(100% - 200px);

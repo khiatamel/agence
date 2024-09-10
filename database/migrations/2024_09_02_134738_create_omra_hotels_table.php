@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reserve_visas', function (Blueprint $table) {
+        Schema::create('omra_hotels', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->number('num');
-            $table->integer('id_dossier');
-            $table->string('statut');
-            $table->foreign('id_dossier')->references('id')->on('dossier_visas')->onDelete('cascade');
+            $table->unsignedBigInteger('omraID');
+            $table->unsignedBigInteger('hotelID');
+            $table->foreign('omraID')->references('id')->on('omras')->onDelete('cascade');
+            $table->foreign('hotelID')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reserve_visas');
+        Schema::dropIfExists('omra_hotels');
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('photo_hotels', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->file('photo');
+            $table->string('photo');
             $table->string('hotel');
             $table->foreign('hotel')->references('nom')->on('hotels')->onDelete('cascade');
         });

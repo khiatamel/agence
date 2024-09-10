@@ -6,6 +6,9 @@ document.getElementById('signupBtn').onclick = function() {
   document.getElementById('loginBtn').onclick = function() {
     document.getElementById('loginPopup').style.display = 'block';
   }
+  document.getElementById('edit').onclick = function() {
+    document.getElementById('edit').style.display = 'block';
+  }
   
   // Fermer le popup
   function closePopup(popupId) {

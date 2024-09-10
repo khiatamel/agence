@@ -18,10 +18,30 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'phone', 'password', 'role','verification_code', 'phone_verified_at',
     ];
+
+    protected $dates = ['phone_verified_at'];
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isDirection()
+    {
+        return $this->role === 'direction';
+    }
+
+    public function isClient()
+    {
+        return $this->role === 'client';
+    }
+
+    public function isAgence()
+    {
+        return $this->role === 'agence';
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,8 +58,8 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function routeNotificationForSms()
+    {
+        return $this->phone;
+    }
 }
