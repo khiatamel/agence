@@ -150,8 +150,8 @@
             <label for="compagne">Compagne</label>
             <select id="compagne" name="compagne">
                 <option value="SV" {{ old('compagne') == 'SV' ? 'selected' : '' }}>SV</option>
-                <option value="AH" {{ old('compagne') == 'AH' ? 'selected' : '' }}>RH</option>
-                <option value="TU" {{ old('compagne') == 'TU' ? 'selected' : '' }}>RH</option>
+                <option value="AH" {{ old('compagne') == 'AH' ? 'selected' : '' }}>AH</option>
+                <option value="TU" {{ old('compagne') == 'TU' ? 'selected' : '' }}>TU</option>
             </select>
         </div>
         <div class="form-submit-btn">
@@ -171,11 +171,11 @@
 <div class="modal fade" id="editProgrammeOmraModal" tabindex="-1" role="dialog" aria-labelledby="editProgrammeOmraLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editProgrammeOmraLabel">Modifier Omra</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProgrammeOmraLabel">Modifier Omra</h5>
             </div>
             <form id="editProgrammeOmraForm" method="POST" action="{{ route('programme_omras.update', $programme_omra->id) }}">
                 @csrf

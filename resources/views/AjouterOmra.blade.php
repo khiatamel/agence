@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('images/L1.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('css/programmeOmra.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ajouter.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <title>Sanhadja Voyage</title>
 </head>
@@ -46,7 +45,8 @@
                                     <th>Retour</th>
                                     <th>NB Place</th>
                                     <th>Saison</th>
-                                    <th>Compagnie</th>
+                                    <th>Compagne</th>
+                                    <th>hotels</th>
                                     <th>Modifier</th>
                                     <th>Supprimer</th>
                                 </tr>
@@ -54,7 +54,7 @@
                             <tbody>
                                 @foreach($omras as $omra)
                                     <tr>
-                                        <td><img src="{{ asset('storage/'.$omra->photo) }}" alt="Photo de l'Omra" style="width: 50px; height: 50px;"></td>
+                                        <td><img src="{{asset('/storage/images/'.$omra->photo)}}" alt="Photo de l'Omra" style="width: 50px; height: 50px;"></td>
                                         <td>{{ $omra->nom }}</td>
                                         <td>{{ $omra->type }}</td>
                                         <td>{{ $omra->depart }}</td>
@@ -62,15 +62,28 @@
                                         <td>{{ $omra->place }}</td>
                                         <td>{{ $omra->saison }}</td>
                                         <td>{{ $omra->compagne }}</td>
+                                        <!-- Hôtels liés à l'Omra -->
+                                        <td>
+                                            @if($omra->hotels && count($omra->hotels) > 0)
+                                                @foreach($omra->hotels as $hotel)
+                                                    {{ $hotel->nom }}<br>
+                                                @endforeach
+                                            @else
+                                                Aucun hôtel assigné
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="#" class="edit-button"
                                                data-id="{{ $omra->id }}"
                                                data-nom="{{ $omra->nom }}"
+                                               data-type="{{ $omra->type }}"
                                                data-depart="{{ $omra->depart }}"
                                                data-retour="{{ $omra->retour }}"
                                                data-place="{{ $omra->place }}"
                                                data-saison="{{ $omra->saison }}"
-                                               data-compagne="{{ $omra->compagne }}">
+                                               data-compagne="{{ $omra->compagne }}"
+                                               data-photo="{{ $omra->photo }}"
+                                               data-hotel-ids="{{ $omra->hotels ? implode(',', $omra->hotels->pluck('id')->toArray()) : '' }}">
                                                <span class="icon"><i class="fas fa-pencil"></i></span>
                                             </a>
                                         </td>
@@ -144,6 +157,21 @@
                                 </select>
                             </div>
                             <div class="user-input-box">
+                                <label for="hotels">hotels</label>
+                                <input type="text" id="hotel-search" placeholder="Select hotels..." readonly>
+                                <div class="hotel-checkboxes">
+                                    <div id="hotels">
+                                        @foreach($hotels as $hotel)
+                                            <div>
+                                                <input type="checkbox" name="hotels[]" value="{{ $hotel->id }}" id="hotel_{{ $hotel->id }}">
+                                                <label for="hotel_{{ $hotel->id }}">{{ $hotel->nom }}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="user-input-box">
                                 <label for="photo">Photo</label>
                                 <input type="file" name="photo" id="photo">
                             </div>
@@ -162,13 +190,14 @@
 <div class="modal fade" id="editProgrammeOmraModal" tabindex="-1" role="dialog" aria-labelledby="editProgrammeOmraLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editProgrammeOmraLabel">Modifier Omra</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProgrammeOmraLabel">Modifier Omra</h5>
+                
             </div>
-            <form id="editProgrammeOmraForm" method="POST" action="{{ route('omras.update', $omra->id) }}">
+            <form id="editProgrammeOmraForm" method="POST" action="{{ route('omras.update', $omra->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="main-user-info">
@@ -207,6 +236,26 @@
                             <option value="TU" {{ old('compagne', $omra->compagne) == 'TU' ? 'selected' : '' }}>TU</option>
                         </select>
                     </div>
+                    <div class="user-input-box">
+                        <label for="editHotels">Hôtels</label>
+                        <input type="text" id="hotel-search" placeholder="Select hotels..." readonly>
+            
+                        <div class="hotel-checkboxe" id="hotel-checkboxes-block">
+                            <div id="editHotels">
+                                @foreach($hotels as $hotel)
+                                <div class="checkbox-dropdown">
+                                        <input type="checkbox" name="hotels[]" value="{{ $hotel->id }}" id="hotel_{{ $hotel->id }}">
+                                        <label for="hotel_{{ $hotel->id }}">{{ $hotel->nom }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-input-box">
+                        <label for="photo">Photo</label>
+                        <input type="file" name="photo" id="photo">
+                        <input type="hidden" name="current_photo" id="current_photo">
+                    </div>
                     <div class="form-submit-btn">
                         <button type="submit">Enregistrer</button>
                     </div>
@@ -220,6 +269,15 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// Toggle the hotel checkboxes block when clicking on the hotel search input
+document.getElementById('hotel-search').addEventListener('click', function() {
+        const checkboxesBlock = document.getElementById('hotel-checkboxes-block');
+        if (checkboxesBlock.style.display === "none" || checkboxesBlock.style.display === "") {
+            checkboxesBlock.style.display = "block";
+        } else {
+            checkboxesBlock.style.display = "none";
+        }
+    });
    document.getElementById('toggleFormBtn').addEventListener('click', function() {
     var formContainer = document.getElementById('formContainer');
 
@@ -235,28 +293,80 @@
     }
 });
 
-    $(document).ready(function () {
-        $('.edit-button').on('click', function () {
-            var id = $(this).data('id');
-            var nom = $(this).data('nom');
-            var depart = $(this).data('depart');
-            var retour = $(this).data('retour');
-            var place = $(this).data('place');
-            var saison = $(this).data('saison');
-            var compagne = $(this).data('compagne');
+document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById("editProgrammeOmraModal");
+        var closeBtn = modal.querySelector(".close");
+        const editButtons = document.querySelectorAll('.edit-button');
+        const editForm = document.getElementById('editProgrammeOmraForm');
 
-            $('#nom').val(nom);
-            $('#depart').val(depart);
-            $('#retour').val(retour);
-            $('#place').val(place);
-            $('#saison').val(saison);
-            $('#compagne').val(compagne);
+        editButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const nom = this.getAttribute('data-nom');
+                const type = this.getAttribute('data-type');
+                const depart = this.getAttribute('data-depart');
+                const retour = this.getAttribute('data-retour');
+                const place = this.getAttribute('data-place');
+                const saison = this.getAttribute('data-saison');
+                const compagne = this.getAttribute('data-compagne');
+                const photo = this.getAttribute('data-photo');
+                const hotelIds = this.getAttribute('data-hotel-ids') ? this.getAttribute('data-hotel-ids').split(',') : [];
 
-            $('#editProgrammeOmraForm').attr('action', '/omras/' + id);
+                editForm.action = `/omras/${id}`;
+                editForm.querySelector('#nom').value = nom || '';
+                editForm.querySelector('#type').value = type || '';
+                editForm.querySelector('#depart').value = depart || '';
+                editForm.querySelector('#retour').value = retour || '';
+                editForm.querySelector('#place').value = place || '';
+                editForm.querySelector('#saison').value = saison || '';
+                editForm.querySelector('#compagne').value = compagne || '';
+                editForm.querySelector('#current_photo').value = photo || '';
 
-            $('#editProgrammeOmraModal').modal('show');
+                const hotelSelect = document.getElementById('editHotels');
+                hotelSelect.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = hotelIds.includes(checkbox.value);
+                });
+
+                modal.style.display = "block";
+            });
         });
-    });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        const searchInput = document.getElementById('hotel-search');
+        const checkboxesContainer = document.querySelector('.hotel-checkboxes');
+        const checkboxes = document.querySelectorAll('.hotel-checkboxes input[type="checkbox"]');
+
+        searchInput.addEventListener('click', function() {
+            checkboxesContainer.classList.toggle('show');
+        });
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const selectedHotels = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.nextElementSibling.textContent.trim())
+                    .join(', ');
+
+                searchInput.value = selectedHotels;
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !checkboxesContainer.contains(event.target)) {
+                checkboxesContainer.classList.remove('show');
+            }
+        });
+});
+
 </script>
 </body>
 </html>

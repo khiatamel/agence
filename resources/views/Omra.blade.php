@@ -73,26 +73,18 @@
 
 <div class="titre"><h1>عروض العمرة </h1></div>
     <div class="container">
+    @foreach($omras as $omra)
         <div class="card__container">
             <article class="card__article">
-                <img src="{{ asset('images/O6.jpg') }}" alt="image" class="card__img">
+                <img src="{{asset('/storage/images/'.$omra->photo)}}" alt="image" class="card__img">
                 <div class="overlay">
-                    <h2 class="card__title">عمرة المولد النبوي الشريف</h2>
-                    <h3 class="card__title">إبتداءا من 17000 دج</h3>
-                    <button class="card__button" onclick="window.location.href='{{ route('mOmra') }}'">Lire plus</button>
-                </div>
+                    <h2 class="card__title">{{$omra->nom}}</h2>
+                    
+                    <button class="card__button" onclick="window.location.href='{{ url('omra/'.$omra->id.'/détail') }}'">Lire plus</button>
+                    </div>
             </article>
         </div>
-        <div class="card__container">
-            <article class="card__article">
-                <img src="{{ asset('images/O5.jpg') }}" alt="image" class="card__img">
-                <div class="overlay">
-                    <h2 class="card__title">عمرة 20 سبتمبر</h2>
-                    <h4 class="card__title">إبتداءا من 15900 دج</h4>
-                    <button class="card__button" onclick="window.location.href='{{ route('mOmra') }}'">Lire plus</button>
-                </div>
-            </article>
-        </div>
+    @endforeach
     </div>
 
     <!-- Inclusion du fichier JavaScript -->

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/agence.css') }}" />
 
     <!-- Add favicon -->
     <link rel="icon" href="{{ asset('images/L1.png') }}" type="image/png">
@@ -130,6 +131,9 @@
   <div class="main-content">
         <div class="background-image-section">
             <header class="navbar">
+              <div class="navbar-logo">
+                <img src="{{ asset('images/logoA.png') }}" alt="Logo">
+              </div>
               <nav class="navbar-menu">
                 <ul>
                 <li><a href="{{ route('omra') }}">Omra</a></li>
@@ -176,6 +180,10 @@
                 </div>
             </header>
              <!-- Background image content or overlay if needed -->
+              
+              <div class="logoCenter">
+                <button>Savoir Plus</button>
+              </div>
         </div>
     </div>
      <!-- Popup Inscrire -->
@@ -232,6 +240,24 @@
             </form>
         </div>
     </div>
+
+  <div class="contain">
+    <div class="titre"><h1>عروض العمرة </h1></div>
+    <div class="container">
+    @foreach($omras as $omra)
+      <a href="{{ url('omra/'.$omra->id.'/détail') }}" class="card__container">
+          <article class="card__article">
+              <img src="{{asset('/storage/images/'.$omra->photo)}}" alt="image" class="card__img">
+              <div class="range__details">
+                  <h2 class="card__title">{{$omra->nom}}</h2>
+                  <i class="ri-arrow-right-line"></i>
+              </div>
+          </article>
+      </a>
+    @endforeach
+    </div>
+  </div>
+
 
 
 

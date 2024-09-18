@@ -20,5 +20,10 @@ class omra extends Model
         'saison',
         'compagne',
         'photo',
+        'hotel_id',
     ];
+    public function hotels()
+    {
+        return $this->belongsToMany(Hotel::class, 'omra_hotels', 'omraID', 'hotelID');
+    }
 }

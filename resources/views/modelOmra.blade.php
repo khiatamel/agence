@@ -15,6 +15,66 @@
 
     <title>Sanhadja Voyage</title>
 </head>
+<style>
+/* Card Background Styles */
+.card__background {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    margin: 20px;
+    max-width: 100%;
+}
+
+.card__background:hover {
+    transform: scale(1.03);
+}
+
+
+/* Card Title */
+.card__title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffff;
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+}
+
+/* Section Title */
+h4 {
+    font-size: 18px;
+    color: #333;
+    margin: 15px 0;
+    text-align: center;
+}
+
+/* Programme Details */
+.programme-details {
+    background-color: #ffff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #ff6f61;
+    font-size: 16px;
+    color: black;
+    border-radius: 5px;
+    line-height: 1.6;
+}
+
+.programme-details p {
+    margin: 5px 0;
+}
+
+/* No Programme Found Message */
+p {
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+
+
+</style>
 <body>
 <!----------------header--------------------->
     <header class="navbar">
@@ -75,140 +135,128 @@
 
 <!----------------container-------------------------------->
     <div class="container">
-        <div class="card__container">
-            <div class="card__background">
-                <img src="{{ asset('images/Couverture Facebook.png') }}" alt="image" class="card__img">
-                <div class="card__content">
-                    <h2 class="card__title">عمرة 20 سبتمبر</h2>
-                    <div>
-                        <h4>رحلة مباشرة مع الخطوط الجوية الجزائرية</h4>
-                        <h3>: العرض يتضمن</h3>
-                        <h4>تأشيرة الدخول</h4>
-                        <h4>تذكرة الطائرة ذهاب و إياب</h4>
-                        <h4>التنقلات بالبقاع المقدسة بحافلات حديثة و مريحة</h4>
-                        <h4>الإقامة في فنادق مكة المكرمة و المدينة</h4>
-                        <h4>مزارات مكة المكرمة و المدينة المنورة</h4>
-                        <h4>الدعم الإرشادي و الديني طيلة الرحلة</h4>
-                        <h4>هدايا من الوكالة الى المعتمرين</h4>
-                    </div>
-                    <button class="card__button" onclick="openReservationPopup()">Réserver</button>
-                </div>
-            </div>
-        </div>
-        <div class="titre"><h1>الفنادق المتوفرة في مكة المكرمة</h1></div>
+    <div class="card__container">
+    <div class="card__background">
+        <img src="{{ asset('images/telecharg.jpeg') }}" alt="image" class="card__img">
+        
+        <div class="card__content">
+            <h2 class="card__title">{{$omra->nom}}</h2>
+            <div>
+                <div class="ribbon">{{$omra->place}} Places </div>
+                @if($omra->type == 'Indirect')
+                    <h4>رحلة غير مباشرة مع الخطوط الجوية التونسية</h4>
+                    @if($programme)
+                        @if($programme->parcourtD == "Oran/Medina")
+                            <div class="programme-details">
+                                <p>ذهاب : من وهران نزولا بتونس إلى جدة</p>
+                                <p>العودة : من جدة نزولا بتونس إلى وهران</p>
+                            </div>
+                        @else
+                            <p>Aucun programme trouvé pour cette Omra.</p>
+                        @endif
+                    @else
+                        <p>Aucun programme trouvé pour cette Omra.</p>
+                    @endif
 
-                <!------------------Hotel1---------------------->
-        <div class="animated-section">
-            <div class="slider-container">       
-                <img src="{{ asset('images/572081148.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115138.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115282.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115141.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572081157.jpg') }}" alt="Image" class="section-image">
-                                 <!-- Repeat images for seamless loop -->
-                <img src="{{ asset('images/572081148.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115138.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115282.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115141.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572081157.jpg') }}" alt="Image" class="section-image">
+                @elseif($omra->type == 'Direct' && $omra->compagne == 'SV')
+                    <h4>رحلة مباشرة مع الخطوط الجوية السعودية</h4>
+                    @if($programme)
+                        @if($programme->parcourtD == "Oran/Medina")
+                            <div class="programme-details">
+                                <p>ذهاب : من وهران إلى المدينة</p>
+                                <p>العودة : من جدة إلى وهران</p>
+                            </div>
+                        @else
+                            <p>Aucun programme trouvé pour cette Omra.</p>
+                        @endif
+                    @else
+                        <p>Aucun programme trouvé pour cette Omra.</p>
+                    @endif
 
-                
-            </div>
-
-             <div class="section-description">
-                <div><h2>فندق أركان بكة بالمواصلات</h2></div>
-                <div><h5>م</h5><h5>1800</h5><h5> :المسافة من الفندق الى الحرم </h5></div>
-                <div><h5>:سعر العمرة حسب الغرف </h5></div>
-                <div><h5>دج</h5><h5>176000</h5><h5><-------خماسية للعائلات </h5></div>
-                <div><h5>دج</h5><h5>189000</h5><h5><----------------رباعية </h5></div> 
-                <div><h5>دج</h5><h5>199000</h5><h5><-----------------ثلاثية </h5></div> 
-                <div><h5>دج</h5><h5>215000</h5><h5><-----------------ثنائية </h5></div> 
-                <div><h5>:سعر الأطفال </h5></div>
-                        <div><h5>دج</h5><h5>58000</h5><h5><----من 0 إلى 1.99</h5></div>
-                        <div><h5>دج</h5><h5>115000</h5><h5><----من 2 إلى 11.99</h5></div>
-                <div style="color:red";><h5>دج</h5><h5>22000</h5><h5><--------------الإطعام</h5></div> 
-
-                <button class="card__button" onclick="openReservationPopup()">Réserver</button>
-            </div>
-        </div>
-
-
-                <!------------------Hotel2---------------------->
-        <div class="animated-section">
+                @else
+                    <h4>رحلة مباشرة مع الخطوط الجوية الجزائرية</h4>
+                    @if($programme)
+                        @if($programme->parcourtD == "Oran/Jeddah")
+                            <div class="programme-details">
+                                <p>ذهاب : من وهران إلى المدينة</p>
+                                <p>العودة : من جدة إلى وهران</p>
+                            </div>
+                        @else
+                            <div class="programme-details">
+                                <p>ذهاب : من وهران إلى جدة</p>
+                                <p>العودة : من المدينة إلى وهران</p>
+                            </div>
+                        @endif
+                    @else
+                        <p>Aucun programme trouvé pour cette Omra.</p>
+                    @endif
+                @endif
+            </div><!--                
+                <h3>: العرض يتضمن</h3>
+                <h4>تأشيرة الدخول</h4>
+                <h4>تذكرة الطائرة ذهاب و إياب</h4>
+                <h4>التنقلات بالبقاع المقدسة بحافلات حديثة و مريحة</h4>
+                <h4>الإقامة في فنادق مكة المكرمة و المدينة</h4>
+                <h4>مزارات مكة المكرمة و المدينة المنورة</h4>
+                <h4>الدعم الإرشادي و الديني طيلة الرحلة</h4>
+                <h4>هدايا من الوكالة الى المعتمرين</h4> -->
             
-
-             <div class="section-description">
-                <div><h2>فندق الأيام أجياد</h2></div>
-                <div><h5>م</h5><h5>600</h5><h5> :المسافة من الفندق الى الحرم </h5></div>
-                <div><h5>:سعر العمرة حسب الغرف </h5></div>
-                <div><h5>دج</h5><h5>176000</h5><h5><-------خماسية للعائلات </h5></div>
-                <div><h5>دج</h5><h5>189000</h5><h5><----------------رباعية </h5></div> 
-                <div><h5>دج</h5><h5>199000</h5><h5><-----------------ثلاثية </h5></div> 
-                <div><h5>دج</h5><h5>215000</h5><h5><-----------------ثنائية </h5></div>
-                <div></div>
-                <div><h5>:سعر الأطفال </h5></div>
-                        <div><h5>دج</h5><h5>58000</h5><h5><----من 0 إلى 1.99</h5></div>
-                        <div><h5>دج</h5><h5>115000</h5><h5><----من 2 إلى 11.99</h5></div>
-                <div style="color:red";><h5>دج</h5><h5>22000</h5><h5><--------------الإطعام</h5></div>  
-                
- 
-                <button class="card__button" onclick="openReservationPopup()">Réserver</button>
-            </div>
-            <div class="slider-container">       
-                <img src="{{ asset('images/510290762.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/564527477.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/564529228.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/564527734.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/510290787.jpg') }}" alt="Image" class="section-image">
-                 <!-- Repeat images for seamless loop -->
-                <img src="{{ asset('images/510290762.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/564527477.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/564529228.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/564527734.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/510290787.jpg') }}" alt="Image" class="section-image">
-            </div>
-        </div>
-
-
-                <!------------------Hotel3---------------------->
-
-        <div class="animated-section">
-            <div class="slider-container">       
-                <img src="{{ asset('images/572081148.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115138.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115282.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115141.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572081157.jpg') }}" alt="Image" class="section-image">
-                <!-- Repeat images for seamless loop -->
-                <img src="{{ asset('images/572081148.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115138.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115282.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572115141.jpg') }}" alt="Image" class="section-image">
-                <img src="{{ asset('images/572081157.jpg') }}" alt="Image" class="section-image">
-            </div>
-
-             <div class="section-description">
-                <div><h2>فندق فجر البديع 2</h2></div>
-                <div><h5>م</h5><h5>300</h5><h5> :المسافة من الفندق الى الحرم </h5></div>
-                <div><h5>:سعر العمرة حسب الغرف </h5></div>
-                <div><h5>دج</h5><h5>176000</h5><h5><-------خماسية للعائلات </h5></div>
-                <div><h5>دج</h5><h5>189000</h5><h5><----------------رباعية </h5></div> 
-                <div><h5>دج</h5><h5>199000</h5><h5><-----------------ثلاثية </h5></div> 
-                <div><h5>دج</h5><h5>215000</h5><h5><-----------------ثنائية </h5></div> 
-                
-                <div></div> 
-                        <div><h5>:سعر الأطفال </h5></div>
-                        <div><h5>دج</h5><h5>58000</h5><h5><----من 0 إلى 1.99</h5></div>
-                        <div><h5>دج</h5><h5>115000</h5><h5><----من 2 إلى 11.99</h5></div>
-                <div style="color:red";><h5>فطور الصباح مجاني</h5></div>
-                
-                   
- 
-                <button class="card__button" onclick="openReservationPopup()">Réserver</button>
-            </div>
+            <!-- <button class="card__button" onclick="openReservationPopup()">Réserver</button> -->
         </div>
     </div>
+</div>
 
+
+<div class="titre">
+                <h1>الفنادق المتوفرة في مكة المكرمة</h1>
+            </div>
+
+            <!-- Check if there are hotels associated with the Omra -->
+            @if($omra->hotels->isEmpty())
+                <p>Aucun hôtel associé à cette Omra.</p>
+            @else
+                @foreach($omra->hotels as $hotel)
+                <div class="animated-section">
+
+                    <!-- Slider for hotel photos -->
+                    <div class="slider-container">  
+                        @foreach($hotel->photos as $photo)
+                            <img src="{{ asset('storage/images/'.$photo->photo) }}" alt="Image" class="section-image">
+                        @endforeach
+                        @foreach($hotel->photos as $photo)
+                            <img src="{{ asset('storage/images/'.$photo->photo) }}" alt="Image" class="section-image">
+                        @endforeach
+                    </div>
+                    
+
+                    <!-- Hotel description section -->
+                    <div class="section-description">
+                        <div>
+                            <h2>{{ $hotel->nom }}</h2>
+                        </div>
+                        <div>
+                            <h5>م</h5>
+                            <h5>{{ $hotel->desc }}</h5>
+                            <h5>:المسافة من الفندق الى الحرم</h5>
+                        </div>
+
+                        <!-- Display tariffs for each room type -->
+                        <h5>:سعر العمرة</h5>
+                            @foreach($hotel->tarifs as $tarif)
+                            <div>
+                                <div>
+                                    <h5>دج</h5><h5>{{ $tarif->prix }}</h5><h5><---------------{{ $tarif->condition }}</h5>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        <!-- Reservation button -->
+                        <button class="card__button" onclick="openReservationPopup()">Réserver</button>
+                    </div>
+                </div>
+                @endforeach
+            @endif
+            
     </div>
 
 <!--------------réservation-------------------->

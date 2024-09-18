@@ -41,8 +41,11 @@ body {
 /* Table Styles */
 .table {
     width: 100%;
+    justify-items: center;
 }
-
+.recentOrders {
+    width: 100%;
+}
 .table__header {
     display: flex;
     justify-content: space-between;
@@ -56,7 +59,7 @@ body {
 }
 
 .table__header .input-group {
-    display: flex;
+    display: block;
     align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
@@ -86,6 +89,7 @@ body {
     padding: 10px;
     border: 1px solid #ddd;
     font-size: 16px;
+    text-align: center;
 }
 
 .table__body th {
@@ -123,8 +127,8 @@ body {
     background-color: #fafafa;
     border-radius: 10px;
     padding: 20px;
+    border: 1px #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    right: 0;
 }
 
 .cardHeader h3 {
@@ -137,10 +141,11 @@ body {
 .main-user-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 10px;
 }
 
 .user-input-box {
+    position: relative; 
     display: flex;
     flex-direction: column;
 }
@@ -152,11 +157,11 @@ body {
 }
 
 .user-input-box input,
-.user-input-box select {
+.user-input-box select{
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .form-submit-btn {
@@ -165,6 +170,7 @@ body {
 }
 
 .form-submit-btn button {
+    width: 100%;
     background-color: #2e7081;
     color: #fff;
     padding: 10px 20px;
@@ -213,10 +219,26 @@ body {
     overflow-y: auto; /* Enable vertical scrolling */
     transition: max-height 0.5s ease-out;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
     position: absolute; /* Change position if needed */
-    right: 10px;
+    right: 20px;
+    border: 1px solid #333;
     width: 40%;
+}
+
+.form-container::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.form-container::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.form-container:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
 }
 
 /* When the form is visible */
@@ -251,15 +273,133 @@ body {
 
 .close {
     top: 0;
-    color: #aaa;
+    color: #a19e9e;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    background-color: #00000000;
+    border: none;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: rgb(19, 19, 19);
     text-decoration: none;
     cursor: pointer;
+}
+
+/*/////////////////////////////////////////////////////////////////////////////////////////*/
+
+.hotel-checkboxe {
+    max-height: 100px; /* Hauteur maximale de la liste */
+    overflow-y: auto; /* Ajoute une barre de défilement si la liste est trop longue */
+    border: 1px solid #ddd; /* Bordure grise pour la liste */
+    border-radius: 4px; /* Coins arrondis pour la liste */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
+    background-color: #fff; /* Fond blanc pour la liste */
+    position: absolute; /* Position absolue pour placer la liste sous le champ de recherche */
+    top: 100%; /* Aligne la liste directement sous le champ de recherche */
+    left: 0; /* Aligne la liste à gauche du conteneur */
+    width: 100%; /* La liste prend toute la largeur du conteneur */
+    z-index: 1000; /* Assure que la liste est au-dessus des autres éléments */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+    padding: 10px; /* Espacement interne de la liste */
+    margin-top: 2px; /* Espacement au-dessus de la liste */
+
+}
+
+.hotel-checkboxes {
+    display: none; /* Cache la liste par défaut */
+    max-height: 100px; /* Hauteur maximale de la liste */
+    overflow-y: auto; /* Ajoute une barre de défilement si la liste est trop longue */
+    border: 1px solid #ddd; /* Bordure grise pour la liste */
+    border-radius: 4px; /* Coins arrondis pour la liste */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour donner un effet de profondeur */
+    background-color: #fff; /* Fond blanc pour la liste */
+    position: absolute; /* Position absolue pour placer la liste sous le champ de recherche */
+    top: 100%; /* Aligne la liste directement sous le champ de recherche */
+    left: 0; /* Aligne la liste à gauche du conteneur */
+    width: 100%; /* La liste prend toute la largeur du conteneur */
+    z-index: 1000; /* Assure que la liste est au-dessus des autres éléments */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+    padding: 10px; /* Espacement interne de la liste */
+    margin-top: 2px; /* Espacement au-dessus de la liste */
+
+}
+
+
+#hotel-search {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.hotel-checkboxes {
+    max-height: 200px; /* Ajustez selon vos besoins */
+    overflow-y: auto;
+}
+
+.hotel-checkbox {
+    margin-bottom: 10px;
+}
+
+
+.hotel-checkboxes.show {
+    display: block;
+}
+
+.hotel-checkbox {
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    height:20px;
+    transition: background-color 0.2s ease;
+}
+
+.hotel-checkbox:hover {
+    background-color: #f0f0f0;
+}
+
+.hotel-checkbox label {
+    display: flex;
+    align-items: center;
+}
+
+.hotel-checkbox input[type="checkbox"] {
+    transform: scale(1.1);
+}
+
+
+.hotel-checkbox::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.hotel-checkbox::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.hotel-checkbox:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+/* When the form is visible */
+.hotel-checkbox.show {
+    display: block;
+    max-height: 80vh; /* Adjust based on form content height */
+}
+.hotel-checkbox {
+    margin: 5px 0;
+}
+
+.hidden {
+    display: none;
 }

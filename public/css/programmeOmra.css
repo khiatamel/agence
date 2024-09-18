@@ -43,6 +43,10 @@ body {
     width: 100%;
 }
 
+.recentOrders {
+    width: 100%;
+}
+
 .table__header {
     display: flex;
     justify-content: space-between;
@@ -172,6 +176,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    width: 100%;
 }
 
 .form-submit-btn button:hover {
@@ -216,7 +221,23 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: absolute; /* Change position if needed */
     right: 10px;
+    border: 1px solid #333;
     width: 40%;
+}
+
+.form-container::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.form-container::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.form-container:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
 }
 
 /* When the form is visible */
@@ -252,15 +273,17 @@ body {
 
 .close {
     top: 0;
-    color: #aaa;
+    color: #a19e9e;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    background-color: #00000000;
+    border: none;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: rgb(19, 19, 19);
     text-decoration: none;
     cursor: pointer;
 }

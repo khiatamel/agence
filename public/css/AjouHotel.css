@@ -1,0 +1,348 @@
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.topbar .user {
+    font-size: 18px;
+    font-weight: bold;
+    list-style: none;
+}
+
+/* Details Section */
+.details {
+    display: block;
+    justify-content: space-between;
+    width: 80%;
+    margin: 20px;
+    padding: 20px;
+    box-shadow:0px 0px 4px #333;
+    border-radius: 20px;
+}
+
+/* Table Styles */
+.table {
+    width: 100%;
+}
+.recentOrders {
+    width: 100%;
+}
+.table__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.table__header h1 {
+    font-size: 24px;
+    color: #2e7081;
+}
+
+.table__header .input-group {
+    display: block;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.table__header .input-group input {
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.table__body {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table__body table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    text-align: left;
+}
+
+.table__body th,
+.table__body td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.table__body th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.table__body td {
+    color: #555;
+}
+
+/* Action Buttons */
+.table__body td a {
+    color: #2e7081;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.table__body td a:hover {
+    color: #1f5163;
+}
+
+.table__body td form button {
+    background-color: transparent;
+    border: none;
+    color: #d9534f;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Action Buttons */
+span{
+    color: #2e7081;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Form Section */
+.recentCustomers {
+    width: auto;
+    background-color: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader h3 {
+    font-size: 22px;
+    color: #2e7081;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.main-user-info {
+    background-color: #ddd;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.tarif{
+    display: block;
+    align-items: center;
+    width: 20%;
+    padding: 5px;
+    background-color: #ddd;
+    border-radius: 5px;
+    
+}
+.user-input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-input-box label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+.user-input-box input,
+.user-input-box select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-submit-btn {
+    grid-column: span 2;
+    text-align: center;
+}
+
+.form-submit-btn button {
+    width: 30%;
+    background-color: #2e7081;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-submit-btn button:hover {
+    background-color: #245564;
+}
+
+
+.form-submit {
+    grid-column: span 2;
+    text-align: center;
+}
+
+.form-submit button {
+    width: 20%;
+    background-color: #fafafa;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-submit button:hover {
+    background-color: #555;
+    color: white;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 80%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+h2, h3 {
+    color: #245564;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.user-input-box, .tarif-item, .photo-box {
+    flex-basis: 48%;
+    margin-bottom: 10px;
+}
+
+.user-input-box label, .tarif-item label, .photo-box label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+input[type="text"], input[type="number"], input[type="file"], textarea {
+    width: 90%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.tarif-item {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.tarif-item label {
+    font-weight: bold;
+}
+
+/* Container for the photos */
+#photos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between photo boxes */
+    margin: 20px 0;
+  }
+  
+  /* Box for each photo */
+  .photo-box {
+    position: relative;
+    width: 120px; /* Adjust the width as needed */
+    height: 120px; /* Adjust the height as needed */
+    overflow: hidden; /* Hide any overflowed content */
+    border: 2px solid #ddd; /* Light border around photo box */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    background: #f8f8f8; /* Light background */
+  }
+  
+  /* Style for the photo image */
+  .photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the box while maintaining aspect ratio */
+  }
+  
+  /* Button to delete photo */
+  .delete-photo {
+    position: absolute;
+    top: 5px; /* Distance from the top edge */
+    right: 5px; /* Distance from the right edge */
+    background: rgba(255, 255, 255, 0.7); /* Slightly transparent background */
+    border: none;
+    border-radius: 50%; /* Round button */
+    width: 30px; /* Button width */
+    height: 30px; /* Button height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Icon inside the button */
+  .delete-photo .icon {
+    color: #ff4d4d; /* Red color for delete icon */
+    font-size: 16px; /* Adjust the size as needed */
+  }
+  
+  /* Hover effect for delete button */
+  .delete-photo:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  }
+  
+
+.details {
+    padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .user-input-box, .tarif-item, .photo-box {
+        flex-basis: 100%;
+    }
+}

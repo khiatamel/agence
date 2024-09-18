@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class photoHotel extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['photo', 'hotel'];
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class, 'hotel', 'nom');
+    }
 }

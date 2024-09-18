@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgrammeOmraController;
 use App\Http\Controllers\OmraController;
+use App\Http\Controllers\HotelController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,18 +92,43 @@ Route::get('/Aomra', function () {
 Route::resource('programme_omras', ProgrammeOmraController::class);
 Route::get('programme_omras/{id}/edit',  [ProgrammeOmraController::class, 'edit'])->name('programme_omras.edit');
 Route::put('/programme_omras/{id}', [ProgrammeOmraController::class, 'update'])->name('programme_omras.update');
-Route::get('/programme_omras', [ProgrammeOmraController::class, 'index'])->name('programme_omra.index');
+Route::get('/programme_omras', [ProgrammeOmraController::class, 'index'])->name('programme_omras.index');
 
-
+//admin
 Route::resource('omras', OmraController::class);
 Route::get('omras/{id}/edit',  [OmraController::class, 'edit'])->name('omras.edit');
 Route::put('/omras/{id}', [OmraController::class, 'update'])->name('omras.update');
 Route::get('/omras', [OmraController::class, 'index'])->name('omra.index');
 
+Route::put('/reservations/{id}/accept', [ReservationOmraController::class, 'accept'])->name('reservations.accept');
+
+    //hotels
+Route::resource('hotels', HotelController::class);
+Route::get('hotels/create', [HotelController::class, 'create'])->name('hotels.create');
+Route::post('articles',  [HotelController::class, 'store'])->name('hotels.store');
+Route::get('hotels/{id}', [HotelController::class, 'show'])->name('hotels.show');
+// Route pour afficher le formulaire de modification
+Route::get('hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
+// Route pour mettre à jour l'hôtel
+Route::put('hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
+
 
 Route::get('/AjouterOmra', function () {
     return view('AjouterOmra');
 })->name('AjouterOmra');
+
+//Agences
+Route::get('/Agence', [OmraController::class, 'afficherAgence'])->name('Agence');
+
+Route::post('/reservations', [ReservationOmraController::class, 'store'])->name('reservations.store');
+Route::put('/reservations/{id}', [ReservationOmraController::class, 'update'])->name('reservations.update');
+Route::delete('/reservations/{id}', [ReservationOmraController::class, 'destroy'])->name('reservations.destroy');
+
+
+//client
+Route::get('/omra', [OmraController::class, 'afficher'])->name('omra');
+Route::get('omra/{id}/détail',  [OmraController::class, 'détail'])->name('omra.détail');
+
 //////////////////////////////////////////////////////////////////////////////
 
 Route::get('/dashboard', function () {

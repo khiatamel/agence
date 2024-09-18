@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('condition');
+            $table->string('prix');
             $table->string('hotel');
             $table->foreign('hotel')->references('nom')->on('hotels')->onDelete('cascade');
         });

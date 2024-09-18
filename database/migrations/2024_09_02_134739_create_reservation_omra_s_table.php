@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('passeport');
             $table->string('photo');
             $table->integer('age');
-            $table->string('statut');
+            $table->string('statut')->default('en cours d\'examen');
             $table->unsignedBigInteger('omraID');
             $table->foreign('omraID')->references('id')->on('omra_hotels')->onDelete('cascade');
         });

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('saison');
             $table->string('photo');
             $table->string('compagne');
+
         });
     }
 
