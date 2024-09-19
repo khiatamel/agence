@@ -782,3 +782,58 @@ thead th.active,tbody td.active {
 .icon-btn:hover {
     opacity: 1;
 }
+
+/* Container for the form and search input */
+.table__header form {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between form elements */
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Styling for the ion-icon */
+.table__header ion-icon {
+    font-size: 20px;
+    color: #2e7081;
+    cursor: pointer;
+    margin-left: -30px; /* Adjust to overlap with input field */
+}
+
+/* Styling for the filter dropdown */
+.table__header select {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Focus state for the filter dropdown */
+.table__header select:focus {
+    border-color: #2e7081;
+}
+
+/* Styling for the filter button */
+.table__header button {
+    padding: 5px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #2e7081;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and focus state for the filter button */
+.table__header button:hover,
+.table__header button:focus {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}

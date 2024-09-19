@@ -81,6 +81,10 @@ Route::get('/billet', function () {
 Route::get('/dash', [OmraController::class, 'dash'])->name('dash')->middleware('role:admin');
 Route::get('/dash/accept/{id}', [ReservationOmraController::class, 'accept'])->name('dash.accept');
 Route::get('/dash/refuse/{id}', [ReservationOmraController::class, 'refuse'])->name('dash.refuse');
+// In routes/web.php or routes/api.php
+Route::get('reservation_omras/index', [OmraController::class, 'dash'])->name('reservation_omras.inde');
+
+Route::get('/reservations/filter/{role}', [ReservationOmraController::class, 'filterByUserRole']);
 
 Route::get('/calender', function () {
     return view('calender');

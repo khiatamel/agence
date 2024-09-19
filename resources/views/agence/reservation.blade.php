@@ -59,6 +59,7 @@
                             </thead>
                             <tbody>
                                 @foreach($reservation_omras as $reservation_omra)
+                                 @if($reservation_omra->omraID == $omra->id && $reservation_omra->user_id == Auth::user()->id)
                                     <tr>
                                         <td>{{ $reservation_omra->nom }}</td>
                                         <td>{{ $reservation_omra->numero }}</td>
@@ -95,6 +96,7 @@
                                             </form>
                                         </td>
                                     </tr>
+                                  @endif                                
                                 @endforeach
                             </tbody>
                         </table>

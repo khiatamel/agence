@@ -105,6 +105,16 @@ public function accept($id)
 
     // Modifier le statut à "accepté"
     $reservation->statut = 'accepté';
+
+    // Récupérer l'Omra associée et décrémenter le nombre de places
+    $omra = Omra::find($reservation->omraID);
+    
+    // Vérifier si l'Omra existe
+    if ($omra) {
+        $omra->place--;
+        $omra->save(); // Sauvegarder les modifications dans Omra
+    }
+
     $reservation->save();
 
     return redirect()->back()->with('success', 'Réservation acceptée ');
@@ -120,6 +130,7 @@ public function refuse($id)
 
     return redirect()->back()->with('refusé', 'Réservation refusé');
 }
+
 
     // Méthode pour supprimer une réservation existante
     public function destroy($id)

@@ -24,9 +24,20 @@ class OmraController extends Controller
         return view('Omra', compact('omras'));
     }
 
-    public function dash()
+    public function dash(Request $request)
     {
-        $reservation_omras = ReservationOmra::all(); 
+        $role = $request->input('role', 'all');  // Default to 'all' if no role is specified
+
+        if ($role === 'all') {
+            // Fetch all reservations
+            $reservation_omras = ReservationOmra::all();
+        } else {
+            // Fetch reservations where the user role matches the specified role
+            $reservation_omras = ReservationOmra::join('users', 'reservation_omras.user_id', '=', 'users.id')
+                ->where('users.role', $role)
+                ->select('reservation_omras.*')  // Ensure only reservation columns are selected
+                ->get();
+        }
         $omras = Omra::all();   // Retrieve all Omra records
         return view('dash', compact('omras', 'reservation_omras'));
     }
