@@ -251,7 +251,10 @@ p {
                         @endforeach
 
                         <!-- Reservation button -->
-                        <button class="card__button" onclick="openReservationPopup()">Réserver</button>
+                         
+                        <button class="card__button">
+                            <a href="{{ route('reservation_omras.index', $omra->id) }}">Réserver</a>
+                        </button>
                     </div>
                 </div>
                 @endforeach

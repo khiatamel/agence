@@ -764,3 +764,21 @@ thead th.active,tbody td.active {
 .annee h3{
 	text-align: center;
 }
+
+.icon-btn-A {
+	color: green;
+    font-size: 1.5em;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.icon-btn-R {
+	color: red;
+    font-size: 1.5em;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    opacity: 1;
+}

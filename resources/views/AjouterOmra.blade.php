@@ -186,6 +186,7 @@
     </div>
 </div>
 
+@isset($omra)
 <!-- Popup Form Container -->
 <div class="modal fade" id="editProgrammeOmraModal" tabindex="-1" role="dialog" aria-labelledby="editProgrammeOmraLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -264,6 +265,7 @@
         </div>
     </div>
 </div>
+@endisset
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('numero');
             $table->string('passeport');
             $table->string('photo');
-            $table->integer('age');
-            $table->string('statut')->default('en cours d\'examen');
-            $table->unsignedBigInteger('omraID');
-            $table->foreign('omraID')->references('id')->on('omra_hotels')->onDelete('cascade');
+            $table->integer('age')->nullable();
+            $table->string('hotel');
+            $table->string('statut')->default('en cours de traitement');
+            $table->foreignId('omraID')->constrained('omra_hotels'); // Ensure 'omra_hotels' table exists
+            $table->foreignId('user_id')->constrained('users'); // Ensure 'users' table exists
         });
     }
 

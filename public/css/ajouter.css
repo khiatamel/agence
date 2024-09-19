@@ -141,7 +141,7 @@ body {
 .main-user-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
 }
 
 .user-input-box {
@@ -223,7 +223,7 @@ body {
     position: absolute; /* Change position if needed */
     right: 20px;
     border: 1px solid #333;
-    width: 40%;
+    width: auto;
 }
 
 .form-container::-webkit-scrollbar{
@@ -305,7 +305,7 @@ body {
     box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
     padding: 10px; /* Espacement interne de la liste */
     margin-top: 2px; /* Espacement au-dessus de la liste */
-
+    
 }
 
 .hotel-checkboxes {

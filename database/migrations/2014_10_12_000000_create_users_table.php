@@ -31,8 +31,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        $table->dropColumn('phone_verified_at');
-        $table->dropColumn('verification_code');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('verification_code'); // Removing the column
+        });
     }
 };

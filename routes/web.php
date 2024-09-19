@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProgrammeOmraController;
 use App\Http\Controllers\OmraController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\ReservationOmraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,9 +78,9 @@ Route::get('/billet', function () {
 })->name('billet');
 
 //admin pages
-Route::get('/dash', function () {
-    return view('dash');
-})->name('dash')->middleware('role:admin');
+Route::get('/dash', [OmraController::class, 'dash'])->name('dash')->middleware('role:admin');
+Route::get('/dash/accept/{id}', [ReservationOmraController::class, 'accept'])->name('dash.accept');
+Route::get('/dash/refuse/{id}', [ReservationOmraController::class, 'refuse'])->name('dash.refuse');
 
 Route::get('/calender', function () {
     return view('calender');
@@ -120,9 +121,11 @@ Route::get('/AjouterOmra', function () {
 //Agences
 Route::get('/Agence', [OmraController::class, 'afficherAgence'])->name('Agence');
 
-Route::post('/reservations', [ReservationOmraController::class, 'store'])->name('reservations.store');
-Route::put('/reservations/{id}', [ReservationOmraController::class, 'update'])->name('reservations.update');
-Route::delete('/reservations/{id}', [ReservationOmraController::class, 'destroy'])->name('reservations.destroy');
+
+Route::resource('reservation_omras', ReservationOmraController::class);
+Route::get('reservation_omras/{id}/edit',  [ReservationOmraController::class, 'edit'])->name('reservation_omras.edit');
+Route::put('/reservation_omras/{id}', [ReservationOmraController::class, 'update'])->name('reservation_omras.update');
+Route::get('reservation_omras/{id}/index', [ReservationOmraController::class, 'index'])->name('reservation_omras.index');
 
 
 //client

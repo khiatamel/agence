@@ -41,7 +41,7 @@
                                     <th>Nom</th>
                                     <th>Adresse</th>
                                     <th>Description</th>
-                                    <th>Voir</th>
+                                    <th>Détail</th>
                                     <th>Modifier</th>
                                     <th>supprimer</th>
                                 </tr>

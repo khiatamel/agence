@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('images/L1.png') }}" type="image/png">
-    <link rel="stylesheet" href="{{ asset('css/programmeOmra.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ajouter.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.min.css">
     <title>Sanhadja Voyage</title>
@@ -15,19 +15,27 @@
         <div class="topbar">
             <div class="user">
                 <li class="navbar-item">    
-                    Agence : {{ Auth::user()->name }}
+
                 </li>
             </div>
             <div class="toggle-form-container">
-                <button id="toggleFormBtn" class="toggle-form-btn">Créer un Programme Omra</button>
+                <button id="toggleFormBtn" class="toggle-form-btn">Ajouter Client</button>
             </div>
         </div>
-
+                    @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
         <div class="details">
             <div class="recentOrders">
                 <main class="table" id="customers_table">
                     <section class="table__header">
-                        <h1>Programmes</h1>
+                        <h1>Clients Omra {{ $omra->nom}}</h1>
                         <div class="input-group">
                             <input type="search" id="searchInput" placeholder="Search Data...">
                             <ion-icon name="search-outline"></ion-icon>
@@ -37,54 +45,54 @@
                         <table id="dataTable">
                             <thead>
                                 <tr>
-                                <th>Photo</th>
                                     <th>Nom Complet</th>
                                     <th>Numéro Téléphone</th>
                                     <th>PassePort</th>
                                     <th>Photo</th>
-                                    <th>Age</th>
+                                    <th>Hotel</th>
+                                    <th>Age(Enfant)</th>
+                                    <th>Groupe</th>
+                                    <th>Statut</th>
                                     <th>Modifier</th>
                                     <th>Supprimer</th>
                                 </tr>
-        
-                                
                             </thead>
                             <tbody>
                                 @foreach($reservation_omras as $reservation_omra)
                                     <tr>
-                                        <td>{{ $reservation_omras->départ }}</td>
-                                        <td>{{ $reservation_omras->nvD }}</td>
-                                        <td>{{ $reservation_omras->parcourtD }}</td>
-                                        <td>{{ $reservation_omras->heurD }}</td>
-                                        <td>{{ $reservation_omras->retour }}</td>
-                                        <td>{{ $reservation_omras->nvR }}</td>
-                                        <td>{{ $reservation_omras->parcourtR }}</td>
-                                        <td>{{ $reservation_omras->heurR }}</td>
-                                        <td>{{ $reservation_omras->compagne }}</td>
+                                        <td>{{ $reservation_omra->nom }}</td>
+                                        <td>{{ $reservation_omra->numero }}</td>
+                                        <td><a href="{{ Storage::url($reservation_omra->passeport) }}" target="_blank">Voir le Passeport</a></td>
+                                        <td><a href="{{ Storage::url($reservation_omra->photo) }}" target="_blank">Voir la Photo</a></td>
+                                        <td>{{ $reservation_omra->hotel }}</td>
+                                        <td>{{ $reservation_omra->age }}</td>
+                                        <td>{{ $reservation_omra->group_name }}</td>
+                                        @if($reservation_omra->statut == 'accepté')
+                                            <td style="color: green;">{{ $reservation_omra->statut }}</td>
+                                        @elseif($reservation_omra->statut == 'refusé')
+                                            <td style="color: red;">{{ $reservation_omra->statut }}</td>
+                                        @else
+                                            <td style="color: blue;">{{ $reservation_omra->statut }}</td>
+                                        @endif
+
                                         <td>
-                                          <a href="#" class="edit-button" 
-                                            data-id="{{ $programme_omra->id }}" 
-                                            data-départ="{{ $programme_omra->départ }}" 
-                                            data-retour="{{ $programme_omra->retour }}"
-                                            data-heurD="{{ $programme_omra->heurD }}" 
-                                            data-heurR="{{ $programme_omra->heurR }}"
-                                            data-nvD="{{ $programme_omra->nvD }}" 
-                                            data-nvR="{{ $programme_omra->nvR }}"
-                                            data-parcourtD="{{ $programme_omra->parcourtD }}" 
-                                            data-parcourtR="{{ $programme_omra->parcourtR }}"
-                                            data-compagne="{{ $programme_omra->compagne }}">
-                                            <span class="icon"><i class="fas fa-pencil"></i></span>
-                                          </a>
+                                            <a href="#" class="edit-button"
+                                               data-id="{{ $reservation_omra->id }}"
+                                               data-nom="{{ $reservation_omra->nom }}"
+                                               data-numero="{{ $reservation_omra->numero }}"
+                                               data-passeport="{{ $reservation_omra->passeport }}"
+                                               data-photo="{{ $reservation_omra->photo }}"
+                                               data-age="{{ $reservation_omra->age }}"
+                                               data-group_name="{{ $reservation_omra->group_name }}">
+                                                <span class="icon"><i class="fas fa-pencil"></i></span>
+                                            </a>
                                         </td>
                                         <td>
-                                            <form action="{{ route('programme_omras.destroy', $programme_omra->id) }}" method="POST" onsubmit="return confirm('vous ètes sûr?');" style="display:inline;">
+                                            <form action="{{ route('reservation_omras.destroy', $reservation_omra->id) }}" method="POST" onsubmit="return confirm('vous êtes sûr?');" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="button"><span class="icon"><i class="fas fa-trash"></i></span></button>
                                             </form>
-                                        </td>
-                                        <td>
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -99,66 +107,125 @@
                     <div class="cardHeader">
                         <h3 style="text-align:center; color:#2e7081">{{ 'Créer un Programme Omra' }}</h3>
                     </div>
-<form action="{{ route('programme_omras.store') }}" method="POST">
-    @csrf
-    <div class="main-user-info">
-        <div class="user-input-box">
-            <label for="départ">Date Départ</label>
-            <input type="date" id="départ" name="départ" value="{{ old('départ') }}">
-        </div>
-        <div class="user-input-box">
-            <label for="retour">Date Retour</label>
-            <input type="date" id="retour" name="retour" value="{{ old('retour') }}">
-        </div>
-        <div class="user-input-box">
-            <label for="heurD">ETD (Départ)</label>
-            <input type="time" id="heurD" name="heurD" value="{{ old('heurD') }}">
-        </div>
-        <div class="user-input-box">
-            <label for="heurR">ETD (Retour)</label>
-            <input type="time" id="heurR" name="heurR" value="{{ old('heurR') }}">
-        </div>
-        <div class="user-input-box">
-            <label for="nvD">N° Vol (Départ)</label>
-            <input type="text" id="nvD" name="nvD" value="{{ old('nvD') }}">
-        </div>
-        <div class="user-input-box">
-            <label for="nvR">N° Vol (Retour)</label>
-            <input type="text" id="nvR" name="nvR" value="{{ old('nvR') }}">
-        </div>
-        <div class="user-input-box">
-            <label for="parcourtD">Parcours (Départ)</label>
-            <select id="parcourtD" name="parcourtD">
-                <option value="Oran/Jeddah" {{ old('parcourtD') == 'Oran/Jeddah' ? 'selected' : '' }}>Oran/Jeddah</option>
-                <option value="Oran/Medina" {{ old('parcourtD') == 'Oran/Medina' ? 'selected' : '' }}>Oran/Medina</option>
-            </select>
-        </div>
-        <div class="user-input-box">
-            <label for="parcourtR">Parcours (Retour)</label>
-            <select id="parcourtR" name="parcourtR">
-                <option value="Jeddah/Oran" {{ old('parcourtR') == 'Jeddah/Oran' ? 'selected' : '' }}>Jeddah/Oran</option>
-                <option value="Medina/Oran" {{ old('parcourtR') == 'Medina/Oran' ? 'selected' : '' }}>Medina/Oran</option>
-            </select>
-        </div>
-        <div class="user-input-box">
-            <label for="compagne">Compagne</label>
-            <select id="compagne" name="compagne">
-                <option value="SV" {{ old('compagne') == 'SV' ? 'selected' : '' }}>SV</option>
-                <option value="AH" {{ old('compagne') == 'AH' ? 'selected' : '' }}>AH</option>
-                <option value="TU" {{ old('compagne') == 'TU' ? 'selected' : '' }}>TU</option>
-            </select>
-        </div>
-        <div class="form-submit-btn">
-            <button type="submit">Créer</button>
-        </div>
-    </div>
-</form>
+                    <form action="{{ route('reservation_omras.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="main-user-info">
+                            <div class="user-input-box">
+                                <label for="nom">Nom Complet</label>
+                                <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
+                            </div>
+                            <div class="user-input-box">
+                                <label for="numero">Numéro Téléphone</label>
+                                <input type="text" id="numero" name="numero" value="{{ old('numero') }}">
+                            </div>
+                            <div class="user-input-box">
+                                <label for="passeport">Passeport (Scanné)</label>
+                                <input type="file" id="passeport" name="passeport" value="{{ old('passeport') }}">
+                            </div>
+                            <div class="user-input-box">
+                                <label for="photo">Photo (Scanné)</label>
+                                <input type="file" id="photo" name="photo" value="{{ old('photo') }}">
+                            </div>
+                            <div class="user-input-box">
+                                <label for="age">Âge (Enfant)</label>
+                                <input type="text" id="age" name="age" value="{{ old('age') }}">
+                            </div>
+                            <div class="user-input-box">
+                                <label for="group_name">Nom de Famille (Groupe)</label>
+                                <input type="text" id="group_name" name="group_name" value="{{ old('group_name') }}">
+                            </div>
+                            <div class="user-input-box">
+                                <label for="hotel">Hotel</label>
+                                <select id="hotel" name="hotel">
+                                    @if($omra->hotels->isEmpty())
+                                        <option disabled>Aucun hôtel associé à cette Omra.</option>
+                                    @else
+                                        <option value="">-- Sélectionnez un hôtel --</option>
+                                        @foreach($omra->hotels as $hotel)
+                                            <option value="{{ $hotel->nom }}" {{ old('hotel') == $hotel->nom ? 'selected' : '' }}>
+                                                {{ $hotel->nom }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
 
-</div>
-</div>
+                            <input type="hidden" name="omraID" value="{{ $omra->id }}">
+                            <div class="form-submit-btn">
+                                <button type="submit">Créer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+@isset($reservation_omra)
+<!-- Popup Form Container -->
+<div class="modal fade" id="editProgrammeOmraModal" tabindex="-1" role="dialog" aria-labelledby="editProgrammeOmraLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProgrammeOmraLabel">Modifier Client</h5>
+            </div>
+            <form id="editProgrammeOmraForm" method="POST" action="{{ route('reservation_omras.update', $reservation_omra->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="main-user-info">
+                    <div class="user-input-box">
+                        <label for="nom">Nom Complet</label>
+                        <input type="text" name="nom" id="nom" value="{{ old('nom', $reservation_omra->nom) }}">
+                    </div>
+                    <div class="user-input-box">
+                        <label for="numero">Numéro</label>
+                        <input type="text" name="numero" id="numero" value="{{ old('numero', $reservation_omra->numero) }}">
+                    </div>
+                    <div class="user-input-box">
+                        <label for="passeport">Passeport (Scanné)</label>
+                        <input type="file" id="passeport" name="passeport">
+                    </div>
+                    <div class="user-input-box">
+                        <label for="photo">Photo (Scanné)</label>
+                        <input type="file" id="photo" name="photo">
+                    </div>
+                    <div class="user-input-box">
+                        <label for="age">Âge (Enfant)</label>
+                        <input type="text" id="age" name="age" value="{{ old('age', $reservation_omra->age) }}">
+                    </div>
+                    <div class="user-input-box">
+                        <label for="group_name">Nom de Famille (Groupe)</label>
+                        <input type="text" id="group_name" name="group_name" value="{{ old('group_name', $reservation_omra->group_name) }}">
+                    </div>
+                    <div class="user-input-box">
+                        <label for="hotel">Hotel</label>
+                        <select id="hotel" name="hotel">
+                            @if($omra->hotels->isEmpty())
+                                <option disabled>Aucun hôtel associé à cette Omra.</option>
+                            @else
+                                <option value="">-- Sélectionnez un hôtel --</option>
+                                @foreach($omra->hotels as $hotel)
+                                    <option value="{{ $hotel->nom }}" {{ old('hotel', $reservation_omra->hotel) == $hotel->nom ? 'selected' : '' }}>
+                                        {{ $hotel->nom }}
+                                    </option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <input type="hidden" name="omraID" value="{{ $omra->id }}">
+                    <div class="form-submit-btn">
+                        <button type="submit">Enregistrer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endisset
 
 
 
@@ -178,6 +245,69 @@
     }
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById("editProgrammeOmraModal");
+        var closeBtn = modal.querySelector(".close");
+        const editButtons = document.querySelectorAll('.edit-button');
+        const editForm = document.getElementById('editProgrammeOmraForm');
+
+        editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const nom = this.getAttribute('data-nom');
+            const numero = this.getAttribute('data-numero');
+            const age = this.getAttribute('data-age');
+            const hotel = this.getAttribute('data-hotel');
+            const group_name = this.getAttribute('data-group_name');
+
+            editForm.action = `/reservation_omras/${id}`;
+            editForm.querySelector('#nom').value = nom || '';
+            editForm.querySelector('#numero').value = numero || '';
+            editForm.querySelector('#age').value = age || '';
+            editForm.querySelector('#hotel').value = hotel || '';
+            editForm.querySelector('#group_name').value = group_name || '';
+
+
+                modal.style.display = "block";
+            });
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        const searchInput = document.getElementById('hotel-search');
+        const checkboxesContainer = document.querySelector('.hotel-checkboxes');
+        const checkboxes = document.querySelectorAll('.hotel-checkboxes input[type="checkbox"]');
+
+        searchInput.addEventListener('click', function() {
+            checkboxesContainer.classList.toggle('show');
+        });
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const selectedHotels = Array.from(checkboxes)
+                    .filter(cb => cb.checked)
+                    .map(cb => cb.nextElementSibling.textContent.trim())
+                    .join(', ');
+
+                searchInput.value = selectedHotels;
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!searchInput.contains(event.target) && !checkboxesContainer.contains(event.target)) {
+                checkboxesContainer.classList.remove('show');
+            }
+        });
+});
 </script>
 <script src="{{ asset('js/search.js') }}"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

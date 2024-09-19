@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Omra; 
 use App\Models\Hotel; 
+use App\Models\ReservationOmra; 
 use Illuminate\Support\Facades\DB;
 
 class OmraController extends Controller
@@ -21,6 +22,13 @@ class OmraController extends Controller
     {
         $omras = Omra::all();
         return view('Omra', compact('omras'));
+    }
+
+    public function dash()
+    {
+        $reservation_omras = ReservationOmra::all(); 
+        $omras = Omra::all();   // Retrieve all Omra records
+        return view('dash', compact('omras', 'reservation_omras'));
     }
 
     public function afficherAgence()

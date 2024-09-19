@@ -166,7 +166,7 @@
     </div>
 </div>
 
- 
+@isset($programme_omra)
 <!-- Modal Structure -->
 <div class="modal fade" id="editProgrammeOmraModal" tabindex="-1" role="dialog" aria-labelledby="editProgrammeOmraLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -235,7 +235,7 @@
         </div>
     </div>
 </div>
-
+@endisset
 <script>
  document.getElementById('toggleFormBtn').addEventListener('click', function() {
     var formContainer = document.getElementById('formContainer');

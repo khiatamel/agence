@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->phone;
     }
+
+    public function reservationOmras()
+    {
+        return $this->hasMany(ReservationOmra::class, 'user_id');
+    }
 }
