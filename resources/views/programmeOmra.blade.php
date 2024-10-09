@@ -42,7 +42,6 @@
                                     <th rowspan="2">Compagne</th>
                                     <th rowspan="2">Modifier</th>
                                     <th rowspan="2">Supprimer</th>
-                                    <th rowspan="2">Status</th>
                                 </tr>
                                 <tr>
                                     <th>Date Aller</th>
@@ -88,9 +87,6 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="button"><span class="icon"><i class="fas fa-trash"></i></span></button>
                                             </form>
-                                        </td>
-                                        <td>
-
                                         </td>
                                     </tr>
                                 @endforeach

@@ -17,247 +17,105 @@
     <title>Sanhadja Voyage</title>
   </head>
 
-<!-- CSS -->
-<style>
-    /* Navbar Styles */
-
-
-    /* Make sure the content below the navbar is not hidden behind it */
-    .main-content {
-        padding-top: 100px; /* Adjust padding based on navbar height */
-    }
-
-    .main-content {
-        min-height: 100vh; /* Ensures content takes the full height of the viewport */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Centers content vertically */
-        align-items: center; /* Centers content horizontally */
-        background-image: url('../images/dashboard.png'); /* Your background image */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-
-    /* Adjust footer position */
-    .site-footer {
-        background-color: #2e7081;
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-        width: 100%;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .footer-row {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-
-    .footer-col {
-        flex: 1;
-        margin: 20px;
-        min-width: 220px;
-    }
-
-    .footer-col h3 {
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .footer-col p, 
-    .footer-col ul, 
-    .footer-col a {
-        font-size: 12px;
-        line-height: 1.6;
-    }
-
-    .footer-col ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    .contact{
-      border-bottom: 2px solid #ccc;
-    }
-    .footer-col ul li {
-        margin-bottom: 5px;
-    }
-
-    .footer-col ul li a {
-        color: white;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .footer-col ul li a:hover {
-        color: #dfe6e9;
-    }
-
-    .footer-col .social-links {
-        display: flex;
-        justify-content: center;
-    }
-
-    .footer-col .social-links a {
-        margin: 0 10px;
-        font-size: 24px;
-        color: white;
-        transition: color 0.3s ease;
-    }
-
-    .footer-col .social-links a:hover {
-        color: #dfe6e9;
-    }
-
-    .footer-bottom {
-        margin-top: 30px;
-        font-size: 14px;
-        border-top: 1px solid #dfe6e9;
-        padding-top: 20px;
-    }
-
-    .footer-bottom p {
-        margin: 0;
-    }
-
-</style>
 <body>
   <div class="main-content">
         <div class="background-image-section">
             <header class="navbar">
-              <div class="navbar-logo">
-                <img src="{{ asset('images/logoA.png') }}" alt="Logo">
-              </div>
-              <nav class="navbar-menu">
-                <ul>
-                <li><a href="{{ route('omra') }}">Omra</a></li>
-                  <li><a href="{{ route('visa')}}">Visa</a></li>
-                  <li><a href="{{ route('hotel')}}">Hotels</a></li>
-                  <li><a href="{{ route('bateau')}}">Bateau</a></li>
-                  <li><a href="{{ route('assurance')}}">Assurance</a></li>
-                  <li><a href="{{ route('voyageOrganisé')}}">Voyage organisé</a></li>
-                  <li><a href="{{ route('billet')}}">Billet</a></li>
-                </ul>
-              </nav>
-              <!-- Autres éléments de navigation -->
-              @if ($errors->any())
-                <div class="alert alert-danger">
+                    
+                  <div class="navbar-logo">
+                    <img src="{{ asset('images/logoA.png') }}" alt="Logo">
+                  </div>
+                  <div class="header-partner">
+                  <div class="account-menu">
+                <div class="account-info">
+                    <!-- Avatar avec initiale -->
+                    <div class="avatar-circle">
+                        <span class="initials">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                    </div>
+                    <span class="username">{{ Auth::user()->name }}</span>
+                    <button id="account-dropdown" class="dropdown-toggle">
+                        <i class="fa fa-chevron-down"></i>
+                    </button>
+                </div>
+    
+                <div class="dropdown-menu" id="dropdown-menu">
                     <ul>
-                      @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                      @endforeach
+                        <li><a href="{{ route('agence.listReservations') }}">Mes Réservations</a></li>
+                        <li><a href="">Profil</a></li>
+                        <li><a href="">Paramètres</a></li>
+                        <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Déconnexion
+                        </a></li>
                     </ul>
+    
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
-               @endif
-                <div class="navbar-sing">
-                    <ul class="navbar-men">
-                         @auth
-                             <li class="navbar-item">
-                                 Bonjour, {{ Auth::user()->name }}! 
-                                 <a href="{{ route('logout') }}" class="navbar-link logout-link" 
-                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                     Déconnexion
-                                 </a>
-                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                     @csrf
-                                 </form>
-                             </li>
-                         @else
-                             <li id="signupBtn" class="navbar-item">
-                                 <a  class="navbar-link">Inscription</a>
-                             </li>
-                             <li id="loginBtn" class="navbar-item">
-                                 <a class="navbar-link">Connexion</a>
-                             </li>
-                         @endauth
-                    </ul>
-                </div>
+            </div>
             </header>
              <!-- Background image content or overlay if needed -->
               
-              <div class="logoCenter">
-                <button>Savoir Plus</button>
-              </div>
-        </div>
-    </div>
-     <!-- Popup Inscrire -->
-    <div id="signupPopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('signupPopup')">&times;</span>
-            <div class="header-with-image">
-                <img src="{{ asset('images/l.png') }}" alt="Logo de l'entreprise" class="signup-image">
-                <h2>Inscription</h2>
+             <div class="logoCenter">
+                <button id="openPop">Savoir Plus</button>
             </div>
-            <form method="POST" action="{{ route('register') }}">
-                @csrf
-                <div>
-                    <input id="name" type="text" name="name" placeholder="Nom complet" value="{{ old('name') }}" required autofocus>
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                </div>
-                <div>
-                    <input id="phone" type="text" name="phone" placeholder="Numéro téléphone" value="{{ old('phone') }}" required>
-                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                </div>
-                <div>
-                    <input id="password" type="password" name="password" placeholder="Mot de passe" required autocomplete="new-password">
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
-                <div>
-                    <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Confirmer mot de passe" required autocomplete="new-password">
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-                </div>
-                <button type="submit">S'inscrire</button>
-            </form>
         </div>
     </div>
 
-    <!-- Popup Connecter -->
-    <div id="loginPopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('loginPopup')">&times;</span>
-            <div class="header-with-image">
-                <h2>Connexion</h2>
-                <img src="{{ asset('images/f.png') }}" alt="Logo de l'entreprise" class="login-image">
-            </div>
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                <div>
-                    <input id="phone" type="text" name="phone" placeholder="Numéro téléphone" value="{{ old('phone') }}" required autofocus>
-                    <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-                </div>
-                <div>
-                    <input id="password" type="password" name="password" placeholder="Mot de passe" required autocomplete="current-password">
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                </div>
-                <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
-                <button type="submit">Se connecter</button>
-            </form>
-        </div>
-    </div>
+
+<!-- Popup -->
+<div id="pop" class="pop" style="display: none;">
+    <div class="pop-content">
+        <span class="close" id="closePop">&times;</span>
+        <h2>Bienvenue chez Senhadja Voyage</h2>
+        <p>un acteur clé dans le secteur du tourisme. Nous invitons les agences de voyages à rejoindre notre réseau de partenaires pour collaborer et offrir à vos clients des expériences inoubliables. En travaillant avec nous, vous aurez accès à des destinations exclusives, des services personnalisés, et une logistique fluide, assurant des séjours de qualité supérieure. Ensemble, nous pouvons offrir des offres attractives et des solutions sur mesure pour répondre aux besoins des voyageurs.
+        </p>        
+        <h2>مرحبا بكم في صنهاجة للسفر</h2>
+        <p>إحدى الشركات الرائدة في قطاع السياحة. ندعو وكالات السفر للانضمام إلى شبكتنا من الشركاء للتعاون وتقديم تجارب لا تُنسى لعملائكم. من خلال العمل معنا، ستحصلون على وصول إلى وجهات حصرية وخدمات مخصصة ولوجستيات مرنة لضمان إقامة بجودة عالية. معاً، يمكننا تقديم عروض جذابة وحلول مخصصة لتلبية احتياجات المسافرين.</p>    </div>
+</div>
+   
 
   <div class="contain">
     <div class="titre"><h1>عروض العمرة </h1></div>
     <div class="container">
     @foreach($omras as $omra)
-      <a href="{{ url('omra/'.$omra->id.'/détail') }}" class="card__container">
-          <article class="card__article">
-              <img src="{{asset('/storage/images/'.$omra->photo)}}" alt="image" class="card__img">
-              <div class="range__details">
-                  <h2 class="card__title">{{$omra->nom}}</h2>
-                  <i class="ri-arrow-right-line"></i>
-              </div>
-          </article>
-      </a>
-    @endforeach
+     @if($omra->place > 0)
+      <div class="card__container">
+        <article class="card__article">
+            <img src="{{ asset('/storage/images/'.$omra->photo) }}" alt="image" class="card__img">
+            <div class="range__details">
+                <a href="{{ url('omra/'.$omra->id.'/détail') }}" class="no-underline">
+                    <h2 class="card__title">{{ $omra->nom }}</h2>
+                </a>
+
+                <!-- Bouton pour afficher les commissions -->
+                <div id="commissionBtn" class="commission">
+                    <button id="openCommissionPopup">Commission</button>
+                </div>
+
+                <!-- Popup des commissions -->
+                <div id="commissionPopup" class="popu" style="display: none;">
+                    <div class="popu-content">
+                        <span class="close" onclick="closePopup('commissionPopup')">&times;</span>
+                        <h2>Prix de la Commission</h2>
+                        <ul>
+                            @foreach($omra->commissions as $commission)
+                                <li>{{ $commission->condition }} : <strong>{{ $commission->prix }} دج</strong></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </article>
+      </div>
+     @endif
+@endforeach
+
+
+
     </div>
   </div>
-
 
 
 
@@ -328,7 +186,52 @@
                 <p>&copy; 2024 SenhadjaVoyage.com </p>
             </div>
         </footer>
-    <!-- Inclusion du fichier JavaScript -->
+<script>
+    document.getElementById('openPop').addEventListener('click', function() {
+    document.getElementById('pop').style.display = 'flex';
+});
+
+// Fermer le popup
+document.getElementById('closePop').addEventListener('click', function() {
+    document.getElementById('pop').style.display = 'none';
+});
+
+    document.getElementById('account-dropdown').addEventListener('click', function() {
+    var menu = document.getElementById('dropdown-menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+});
+
+document.querySelectorAll('#openCommissionPopup').forEach(button => {
+    button.addEventListener('click', function() {
+        let popup = this.closest('.range__details').querySelector('#commissionPopup');
+        popup.style.display = 'block';
+    });
+});
+function openCommissionPopup(omraId) {
+    const popup = document.getElementById('commissionPopup_' + omraId);
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+function closePopup(popupId) {
+    const popup = document.getElementById(popupId);
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+// Optionnel : Fermer le popup si on clique à l'extérieur
+window.onclick = function(event) {
+    const popups = document.getElementsByClassName('popu');
+    for (let i = 0; i < popups.length; i++) {
+        if (event.target === popups[i]) {
+            popups[i].style.display = 'none';
+        }
+    }
+};
+
+</script>
     <script src="{{ asset('js/javascript.js') }}"></script>
   </body>
 </html>

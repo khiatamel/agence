@@ -1,0 +1,286 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    background-color: #4CAF50;
+    margin-bottom: 5px;
+}
+
+.navbar-logo img {
+    height: 70px;
+}
+
+.header-partner {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+.header-partner .logo a {
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-partner .account-menu {
+    position: relative;
+}
+
+.header-partner .account-info {
+    display: flex;
+    align-items: center;
+}
+
+.header-partner .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.header-partner .username {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: large;
+}
+
+.header-partner .dropdown-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.header-partner .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.header-partner .dropdown-menu ul {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.header-partner .dropdown-menu ul li {
+    margin: 10px 0;
+}
+
+.header-partner .dropdown-menu ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.header-partner .dropdown-menu ul li a:hover {
+    color: #4CAF50;
+}
+
+/* Affichage du menu au survol ou clic */
+.header-partner .account-menu:hover .dropdown-menu,
+.header-partner .dropdown-toggle:focus + .dropdown-menu {
+    display: block;
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-circle {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #4CAF50;
+    margin-right: 10px;
+}
+
+.username {
+    color: white;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+      /* Styles du dropdown menu */
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 200px;
+        display: none; /* Masqué par défaut */
+        z-index: 1000;
+    }
+    
+    .dropdown-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .dropdown-menu ul li {
+        border-bottom: 1px solid #c0bfbf;
+    }
+    
+    .dropdown-menu ul li:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-menu ul li a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #050505;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+    }
+    
+    .dropdown-menu ul li a:hover {
+        background-color: #f5f5f5;
+        color: #000;
+    }
+    
+    /* Style pour le bouton de déconnexion */
+    .dropdown-menu ul li a.logout {
+        color: #d9534f; /* Rouge pour Déconnexion */
+    }
+    
+    .dropdown-menu ul li a.logout:hover {
+        background-color: #f8d7da; /* Couleur d'alerte légère */
+        color: #c9302c;
+    }
+
+.account-info:hover .dropdown-menu {
+    display: block;
+}
+
+/* Omra Section Styling */
+.omra-section {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    transition: background-color 0.3s ease;
+}
+
+.omra-header {
+    font-size: 18px;
+    color: #4CAF50;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #e0f7e9;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.omra-header:hover {
+    background-color: #d3f2db;
+}
+
+.toggle-icon {
+    font-size: 16px;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+/* Reservation Table Styling */
+.reservation-table {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.reservation-table.expanded {
+    max-height: 1000px; /* or a large value to accommodate content */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        padding: 10px;
+    }
+
+    .omra-header {
+        font-size: 16px;
+    }
+}
+

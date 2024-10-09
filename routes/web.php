@@ -6,6 +6,8 @@ use App\Http\Controllers\ProgrammeOmraController;
 use App\Http\Controllers\OmraController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReservationOmraController;
+use App\Http\Controllers\CommissionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,6 +87,14 @@ Route::get('/dash/refuse/{id}', [ReservationOmraController::class, 'refuse'])->n
 Route::get('reservation_omras/index', [OmraController::class, 'dash'])->name('reservation_omras.inde');
 
 Route::get('/reservations/filter/{role}', [ReservationOmraController::class, 'filterByUserRole']);
+Route::get('/reservations/filtre/{userId}', 'ReservationController@filterReservationsByUser');
+Route::get('/reservation_omras/{omraId}/details', [ReservationController::class, 'filterReservationsByOmra']);
+Route::get('/reservations/{omraId}', [ReservationController::class, 'getReservations']);
+
+
+// web.php (Laravel routes)
+Route::get('/reservation_omra/{id}/details', [OmraController::class, 'getDetails']);
+
 
 Route::get('/calender', function () {
     return view('calender');
@@ -107,6 +117,11 @@ Route::get('/omras', [OmraController::class, 'index'])->name('omra.index');
 
 Route::put('/reservations/{id}/accept', [ReservationOmraController::class, 'accept'])->name('reservations.accept');
 
+Route::get('commissions/omra/{id}', [CommissionController::class, 'createForOmra'])->name('commissions.createForOmra');
+Route::post('commissions/store', [CommissionController::class, 'store'])->name('commissions.store');
+Route::delete('commissions/{id}', [CommissionController::class, 'destroy'])->name('commissions.destroy');
+Route::put('/commission/update', [CommissionController::class, 'update'])->name('commissions.update');
+
     //hotels
 Route::resource('hotels', HotelController::class);
 Route::get('hotels/create', [HotelController::class, 'create'])->name('hotels.create');
@@ -124,6 +139,11 @@ Route::get('/AjouterOmra', function () {
 
 //Agences
 Route::get('/Agence', [OmraController::class, 'afficherAgence'])->name('Agence');
+Route::get('/ListReservation', [ReservationOmraController::class, 'afficherReservation'])->name('list.reservation');
+// 
+Route::middleware(['auth', 'role:admin'])->group(function() {
+    Route::get('/agence/reservations', [ReservationOmraController::class, 'viewAgencyReservations'])->name('agence.listReservations');
+});
 
 
 Route::resource('reservation_omras', ReservationOmraController::class);

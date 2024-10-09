@@ -12,126 +12,108 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="{{ asset('css/mOmra.css') }}">
+    
+        <!-- icon -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <title>Sanhadja Voyage</title>
 </head>
 <style>
-/* Card Background Styles */
-.card__background {
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    margin: 20px;
-    max-width: 100%;
-}
+        /* Card Background Styles */
+        .card__background {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            margin: 20px;
+            max-width: 100%;
+        }
 
-.card__background:hover {
-    transform: scale(1.03);
-}
+        .card__background:hover {
+            transform: scale(1.03);
+        }
 
 
-/* Card Title */
-.card__title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ffff;
-    text-align: center;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
-}
+        /* Card Title */
+        .card__title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffff;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+        }
 
-/* Section Title */
-h4 {
-    font-size: 18px;
-    color: #333;
-    margin: 15px 0;
-    text-align: center;
-}
+        /* Section Title */
+        h4 {
+            font-size: 18px;
+            color: #333;
+            margin: 15px 0;
+            text-align: center;
+        }
 
-/* Programme Details */
-.programme-details {
-    background-color: #ffff;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-left: 4px solid #ff6f61;
-    font-size: 16px;
-    color: black;
-    border-radius: 5px;
-    line-height: 1.6;
-}
+        /* Programme Details */
+        .programme-details {
+            background-color: #ffff;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff6f61;
+            font-size: 16px;
+            color: black;
+            border-radius: 5px;
+            line-height: 1.6;
+        }
 
-.programme-details p {
-    margin: 5px 0;
-}
+        .programme-details p {
+            margin: 5px 0;
+        }
 
-/* No Programme Found Message */
-p {
-    color: black;
-    font-size: 16px;
-    text-align: center;
-}
+        /* No Programme Found Message */
+        p {
+            color: black;
+            font-size: 16px;
+            text-align: center;
+        }
 
 
 </style>
 <body>
 <!----------------header--------------------->
-    <header class="navbar">
-        <div class="navbar-logo">
-            <img src="{{ asset('images/logoA.png') }}" alt="Logo">
-        </div>
-        <nav class="navbar-menu">
-        <ul>
-        <li><a href="{{ route('omra') }}">Omra</a></li>
-          <li><a href="{{ route('visa')}}">Visa</a></li>
-          <li><a href="{{ route('hotel')}}">Hotels</a></li>
-          <li><a href="{{ route('bateau')}}">Bateau</a></li>
-          <li><a href="{{ route('assurance')}}">Assurance</a></li>
-          <li><a href="{{ route('voyageOrganisé')}}">Voyage organisé</a></li>
-          <li><a href="{{ route('billet')}}">Billet</a></li>
-        </ul>
-        </nav>
-        <div class="navbar-Sing">
-            <button id="signupBtn">S'inscrire</button>
-            <button id="loginBtn">Se connecter</button>
-        </div>
-    </header>
-    
-   <!-- Popup Inscrire -->
-<div id="signupPopup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('signupPopup')">&times;</span>
-    <div class="header-with-image">
-      <img src="{{ asset('images/l.png') }}" alt="Logo de l'entreprise" class="signup-image">
-      <h2>Inscription</h2>
+<header class="navbar">
+                    
+                    <div class="navbar-logo">
+                      <img src="{{ asset('images/logoA.png') }}" alt="Logo">
+                    </div>
+                    <div class="header-partner">
+                    <div class="account-menu">
+                  <div class="account-info">
+                      <!-- Avatar avec initiale -->
+                      <div class="avatar-circle">
+                          <span class="initials">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                      </div>
+                      <span class="username">{{ Auth::user()->name }}</span>
+                      <button id="account-dropdown" class="dropdown-toggle">
+                          <i class="fa fa-chevron-down"></i>
+                      </button>
+                  </div>
       
-    </div>
-    <form>
-      <input type="text" placeholder="Nom d'utilisateur" required>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Mot de passe" required>
-      <button type="submit">S'inscrire</button>
-    </form>
-   </div>
-</div>
-
-    <!-- Popup Connecter -->
-<div id="loginPopup" class="popup">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('loginPopup')">&times;</span>
-    <div class="header-with-image">
-      <h2 >Connexion</h2>
-      <img src="{{ asset('images/f.png') }}" alt="Logo de l'entreprise" class="login-image">
-    </div>
-    <form>
-      <input type="text" placeholder="Nom d'utilisateur ou Email" required>
-      <input type="password" placeholder="Mot de passe" required>
-      <button type="submit">Se connecter</button>
-    </form>
-  </div>
-</div>
-
+                  <div class="dropdown-menu" id="dropdown-menu">
+                      <ul>
+                          <li><a href="{{ route('agence.listReservations') }}">Mes Réservations</a></li>
+                          <li><a href="">Profil</a></li>
+                          <li><a href="">Paramètres</a></li>
+                          <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                              Déconnexion
+                          </a></li>
+                      </ul>
+      
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                  </div>
+              </div>
+              </header>
 
 <!----------------container-------------------------------->
     <div class="container">
@@ -141,7 +123,7 @@ p {
         
         <div class="card__content">
             <h2 class="card__title">{{$omra->nom}}</h2>
-            <div>
+            <div class="programme">
                 <div class="ribbon">{{$omra->place}} Places </div>
                 @if($omra->type == 'Indirect')
                     <h4>رحلة غير مباشرة مع الخطوط الجوية التونسية</h4>
@@ -202,10 +184,12 @@ p {
                 <h4>هدايا من الوكالة الى المعتمرين</h4> -->
             
             <!-- <button class="card__button" onclick="openReservationPopup()">Réserver</button> -->
+
         </div>
     </div>
+               
+ 
 </div>
-
 
 <div class="titre">
                 <h1>الفنادق المتوفرة في مكة المكرمة</h1>
@@ -261,38 +245,12 @@ p {
             @endif
             
     </div>
-
-<!--------------réservation-------------------->
-
-<!-- Popup Structure -->
-<div id="reservationPopup" class="pop">
-    <div class="pop-content">
-        <span class="close" onclick="closePopup('reservationPopup')">&times;</span>
-        <h2>Réservation</h2>
-        <form id="reservationForm">
-            <!-- Existing fields -->
-            
-            <label for="date">Date de réservation :</label>
-            <input type="date" id="date" name="date" required>
-
-            <label for="guests">Hotel :</label>
-            <input type="text" id="Hotel" name="Hotel" required>
-
-            <label for="guests">Nombre de personnes :</label>
-            <input type="number" id="guests" name="guests" required>
-
-
-                 <!-- Number of children input -->
-            <label for="number-of-children">Nombre d'enfants :</label>
-            <input type="number" id="number-of-children" name="number-of-children" min="0" max="3" />
-
-            <div class="button-container">
-                 <button type="submit" onclick="window.location.href='{{ route('rsOmra') }}'">Suivant</button>
-            </div>
-            
-        </form>
-    </div>
-</div>
+<script>
+     document.getElementById('account-dropdown').addEventListener('click', function() {
+    var menu = document.getElementById('dropdown-menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+});
+</script>
     
     <!-- Inclusion du fichier JavaScript -->
     <script src="{{ asset('js/javascript.js') }}"></script>

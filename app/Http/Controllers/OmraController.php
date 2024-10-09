@@ -24,27 +24,54 @@ class OmraController extends Controller
         return view('Omra', compact('omras'));
     }
 
-    public function dash(Request $request)
-    {
-        $role = $request->input('role', 'all');  // Default to 'all' if no role is specified
+    public function getDetails($id)
+{
+    $reservations = ReservationOmra::where('omraID', $id)->get(); // Exemple d'une requête
+    return response()->json($reservations);
+}
 
-        if ($role === 'all') {
-            // Fetch all reservations
-            $reservation_omras = ReservationOmra::all();
-        } else {
-            // Fetch reservations where the user role matches the specified role
-            $reservation_omras = ReservationOmra::join('users', 'reservation_omras.user_id', '=', 'users.id')
-                ->where('users.role', $role)
-                ->select('reservation_omras.*')  // Ensure only reservation columns are selected
-                ->get();
-        }
-        $omras = Omra::all();   // Retrieve all Omra records
-        return view('dash', compact('omras', 'reservation_omras'));
+    
+    public function dash(Request $request)
+{
+    // Récupérer le rôle sélectionné (ou 'all' par défaut)
+    $role = $request->input('role', 'all');
+
+    // Récupérer l'Omra sélectionnée
+    $selectedOmraId = $request->input('selected_omra');
+
+    // Commencer la requête de base pour les réservations
+    $query = ReservationOmra::query();
+
+    // Filtrer par Omra si un ID est sélectionné
+    if ($selectedOmraId) {
+        $query->where('omraID', $selectedOmraId);
     }
+
+    // Ajouter un filtre selon le rôle si un rôle spécifique est sélectionné
+    if ($role !== 'all') {
+        // Joindre la table `users` pour filtrer par rôle
+        $query->join('users', 'reservation_omras.user_id', '=', 'users.id')
+              ->where('users.role', $role)
+              ->select('reservation_omras.*'); // Sélectionner uniquement les colonnes de `reservation_omras`
+    }
+
+    // Exécuter la requête pour récupérer les réservations
+    $reservation_omras = $query->get();
+
+    // Récupérer toutes les Omras pour la sélection
+    $omras = Omra::all();
+
+    // Retourner la vue avec les données nécessaires
+    return view('dash', [
+        'reservation_omras' => $reservation_omras,
+        'omras' => $omras,
+        'selected_omra' => $selectedOmraId,
+    ]);
+}
 
     public function afficherAgence()
     {
-        $omras = Omra::all();
+        $omras = Omra::with('commissions')->get(); // Assurez-vous que la relation est définie dans le modèle Omra
         return view('agence.presentation', compact('omras'));
     }
 
@@ -164,4 +191,6 @@ class OmraController extends Controller
 
         return redirect()->route('omra.index')->with('success', 'Omra deleted successfully.');
     }
+
+    
 }

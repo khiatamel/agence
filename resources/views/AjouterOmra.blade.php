@@ -49,6 +49,7 @@
                                     <th>hotels</th>
                                     <th>Modifier</th>
                                     <th>Supprimer</th>
+                                    <th>commission</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,6 +96,13 @@
                                                     <span class="icon"><i class="fas fa-trash"></i></span>
                                                 </button>
                                             </form>
+                                        </td>
+                                        <td> 
+                                            <a  href="{{ route('commissions.createForOmra', ['id' => $omra->id]) }}">
+                                                <span class="icon" style="color: green;">
+                                                    <i class="fas fa-handshake" aria-hidden="true"></i>
+                                                </span>
+                                            </a>                                       
                                         </td>
                                     </tr>
                                 @endforeach

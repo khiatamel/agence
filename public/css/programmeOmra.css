@@ -41,6 +41,7 @@ body {
 /* Table Styles */
 .table {
     width: 100%;
+    
 }
 
 .recentOrders {
@@ -82,7 +83,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
-    text-align: left;
+    text-align: center;
 }
 
 .table__body th,

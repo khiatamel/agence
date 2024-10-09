@@ -58,7 +58,7 @@ class ProgrammeOmraController extends Controller
         $programmeOmra->compagne = $request->input('compagne');
         $programmeOmra->save();
 
-        return redirect()->route('programme_omra.index')->with('success', 'Programme updated successfully.');
+        return redirect()->route('programme_omras.index')->with('success', 'Programme updated successfully.');
     }
     
 

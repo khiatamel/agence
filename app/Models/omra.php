@@ -26,4 +26,17 @@ class omra extends Model
     {
         return $this->belongsToMany(Hotel::class, 'omra_hotels', 'omraID', 'hotelID');
     }
+
+    public function commissions()
+    {
+        return $this->hasMany(Commission::class, 'omra');
+    }
+
+   // Omra.php
+public function reservations()
+{
+    return $this->hasMany(ReservationOmra::class, 'omraID'); // Use 'omraID' instead of 'omra_id'
+}
+
+
 }

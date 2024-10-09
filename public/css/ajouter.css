@@ -403,3 +403,39 @@ body {
 .hidden {
     display: none;
 }
+
+/* Style pour l'information de réservation */
+.reservation-info {
+    background-color: #fff3cd; /* Fond jaune pâle */
+    color: #856404; /* Couleur du texte */
+    padding: 10px 20px; /* Espacement interne pour respirer */
+    border: 1px solid #ffeeba; /* Bordure assortie */
+    border-radius: 8px; /* Coins arrondis */
+    margin: 0 auto; /* Centre horizontalement */
+    text-align: center; /* Texte centré */
+    max-width: 600px; /* Limiter la largeur */
+    font-size: 16px; /* Taille de la police */
+    font-weight: 500; /* Texte en gras léger */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    position: relative;
+    top: 0px; /* Légère séparation par rapport aux autres éléments */
+    animation: fadeIn 0.5s ease-in-out; /* Animation douce lors de l'apparition */
+}
+
+/* Animation pour faire apparaître doucement l'élément */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Adaptation pour les petits écrans */
+@media (max-width: 768px) {
+    .reservation-info {
+        padding: 8px 15px; /* Moins d'espacement pour mobile */
+        font-size: 14px; /* Réduire la taille de la police pour mobile */
+    }
+}

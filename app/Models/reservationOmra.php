@@ -25,4 +25,14 @@ class reservationOmra extends Model
 {
     return $this->belongsTo(User::class, 'user_id');
 }
+
+public function omra()
+    {
+        return $this->belongsTo(Omra::class);
+    }
+
+    public function agence()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

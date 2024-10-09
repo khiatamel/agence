@@ -18,6 +18,10 @@
 
                 </li>
             </div>
+            
+                <div class="reservation-info">
+                    <p>⚠️ La réservation sera effectuée. Si elle est acceptée, il faudra faire le paiement pour la confirmation.</p>
+                </div>
             <div class="toggle-form-container">
                 <button id="toggleFormBtn" class="toggle-form-btn">Ajouter Client</button>
             </div>
@@ -32,6 +36,7 @@
                         </div>
                     @endif
         <div class="details">
+            
             <div class="recentOrders">
                 <main class="table" id="customers_table">
                     <section class="table__header">
@@ -163,7 +168,7 @@
         </div>
     </div>
 </div>
-
+ 
 @isset($reservation_omra)
 <!-- Popup Form Container -->
 <div class="modal fade" id="editProgrammeOmraModal" tabindex="-1" role="dialog" aria-labelledby="editProgrammeOmraLabel" aria-hidden="true">
