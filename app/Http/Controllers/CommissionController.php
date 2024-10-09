@@ -35,29 +35,30 @@ class CommissionController extends Controller
                          ->with('success', 'Commission ajoutée avec succès.');
     }
 
-    public function update(Request $request)
-    {
-        // Valider la requête
-        $validated = $request->validate([
-            'prix' => 'required|numeric',
-            'condition' => 'required|string',
-            'omra_id' => 'required|exists:omras,id',
+    public function update(Request $request, $id)
+{
+    // Valider les données envoyées
+    $validated = $request->validate([
+        'prix' => 'required|numeric',
+        'condition' => 'required|string',
+    ]);
+
+    try {
+        // Rechercher la commission par son ID et la mettre à jour
+        $commission = Commission::findOrFail($id);
+        $commission->update([
+            'prix' => $request->prix,
+            'condition' => $request->condition,
         ]);
-    
-        try {
-            // Chercher ou créer la commission pour l'Omra sélectionnée
-            $commission = Commission::updateOrCreate(
-                ['omra' => $request->omra_id], // Condition de mise à jour ou création
-                ['prix' => $request->prix, 'condition' => $request->condition] // Champs à mettre à jour
-            );
-    
-            return redirect()->back()->with('success', 'Commission mise à jour avec succès !');
-    
-        } catch (\Exception $e) {
-            // En cas d'erreur, retournez un message d'erreur
-            return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour.');
-        }
+
+        return redirect()->back()->with('success', 'Commission mise à jour avec succès !');
+
+    } catch (\Exception $e) {
+        // En cas d'erreur, retourner un message d'erreur
+        return redirect()->back()->with('error', 'Une erreur est survenue lors de la mise à jour.');
     }
+}
+
     
     // Suppression d'une commission
     public function destroy($id)

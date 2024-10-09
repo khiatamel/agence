@@ -15,6 +15,7 @@ class OmraController extends Controller
     {
         $hotels = Hotel::all(); // Retrieve all hotels from the database
         $omras = Omra::all();   // Retrieve all Omra records
+        
         return view('AjouterOmra', compact('omras', 'hotels'));
     }
 
@@ -25,11 +26,23 @@ class OmraController extends Controller
     }
 
     public function getDetails($id)
-{
-    $reservations = ReservationOmra::where('omraID', $id)->get(); // Exemple d'une requête
-    return response()->json($reservations);
-}
-
+    {
+        // Check if the provided Omra ID exists in the table and log the query
+        \Log::info("Looking for reservations with omraID: " . $id);
+    
+        // Attempt to find reservations by Omra ID
+        $reservation_omras = ReservationOmra::where('omraID', $id)->get();
+    
+        // Check if reservations are found and log the count
+        if ($reservation_omras->isEmpty()) {
+            \Log::info('No reservations found for Omra ID: ' . $id);
+            return response()->json(['error' => 'No reservations found for this Omra'], 404);
+        }
+    
+    
+        // Return the reservations as JSON
+        return response()->json($reservation_omras);
+    }
     
     public function dash(Request $request)
 {
@@ -76,19 +89,20 @@ class OmraController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'nom' => 'required',
-            'type' => 'required',
-            'depart' => 'required|date',
-            'retour' => 'required|date',
-            'place' => 'required|integer',
-            'saison' => 'required|integer',
-            'compagne' => 'required|string',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',  // Validate image
-            'hotels' => 'required|array', // Ensure hotels are selected
-        ]);
+{
+    $validated = $request->validate([
+        'nom' => 'required',
+        'type' => 'required',
+        'depart' => 'required|date',
+        'retour' => 'required|date',
+        'place' => 'required|integer',
+        'saison' => 'required|integer',
+        'compagne' => 'required|string',
+        'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',  // Validate image
+        'hotels' => 'required|array', // Ensure hotels are selected
+    ]);
 
+    try {
         // Handle the image upload
         if ($request->hasFile('photo')) {
             $fileName = time().'.'.$request->photo->extension();
@@ -112,9 +126,17 @@ class OmraController extends Controller
         // Attach selected hotels to Omra
         $omra->hotels()->attach($validated['hotels']);  // Add hotels using pivot table
 
-        return redirect()->route('omra.index')->with('success', 'Omra created successfully.');
+        // Success message
+        session()->flash('success', 'L\'Omra a été créée avec succès.');
+    } catch (\Exception $e) {
+        // If any error occurs, flash error message
+        session()->flash('error', 'Une erreur est survenue lors de la création de l\'Omra.');
+        return redirect()->back()->withErrors($e->getMessage());
     }
 
+    return redirect()->route('omra.index');
+}
+ 
 
     public function update(Request $request, $id)
     {
@@ -159,7 +181,7 @@ class OmraController extends Controller
         // Sync hotels (remove old relationships and add new ones)
         $omra->hotels()->sync($validated['hotels']);  // Sync hotels with the updated list
 
-        return redirect()->route('omra.index')->with('success', 'Omra updated successfully.');
+        return redirect()->route('omra.index')->with('success', 'Omra a été modifier avec succès.');
     }
 
     public function détail($id)
@@ -180,17 +202,49 @@ class OmraController extends Controller
     // Delete a specific record
     public function destroy($id)
     {
-        $omra = Omra::findOrFail($id);
-
-        // Optionally, delete the associated photo
-        if ($omra->photo && file_exists(public_path('storage/images/' . $omra->photo))) {
-            unlink(public_path('storage/images/' . $omra->photo));
-        }
-
-        $omra->delete();
-
-        return redirect()->route('omra.index')->with('success', 'Omra deleted successfully.');
-    }
-
+        try {
+            // Essayez de trouver l'Omra
+            $omra = Omra::findOrFail($id); // Utiliser findOrFail pour lancer une exception si non trouvé
+            $omra->delete();
     
-}
+            // Définir un message de succès
+            session()->flash('success', 'L\'hôtel a été supprimé avec succès !');
+        } catch (\Illuminate\Database\QueryException $ex) {
+            // Vérifiez si l'erreur est due à une contrainte de clé étrangère
+            if ($ex->getCode() == 23000) {
+                // Définir un message d'erreur
+                session()->flash('error', 'Impossible de supprimer l\'hôtel. Il est lié à des réservations existantes.');
+            } else {
+                // Pour d'autres types d'erreurs
+                session()->flash('error', 'Une erreur est survenue. Veuillez réessayer.');
+            }
+        } catch (\Exception $e) {
+            // Gestion d'autres exceptions
+            session()->flash('error', 'Une erreur inattendue est survenue : ' . $e->getMessage());
+        }
+    
+        // Redirige vers la route d'index des toasts ou d'hôtels après la suppression
+        return redirect()->route('toasts.index'); // Remplacez 'toasts.index' par votre route appropriée
+    }
+    
+    // Méthode pour simuler une opération réussie
+    public function success(Request $request)
+    {
+        session()->flash('success', 'L\'opération a réussi avec succès !');
+        return redirect()->route('toasts.success');
+    }
+    
+    // Méthode pour simuler une erreur
+    public function error(Request $request)
+    {
+        session()->flash('error', 'Une erreur est survenue. Veuillez réessayer.');
+        return redirect()->route('toasts.error');
+    }
+    
+    // Méthode pour simuler un avertissement
+    public function warning(Request $request)
+    {
+        session()->flash('warning', 'Attention : Vérifiez vos données avant de continuer.');
+        return redirect()->route('toasts.warning');
+    }
+}    

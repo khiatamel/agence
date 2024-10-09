@@ -16,8 +16,29 @@ function activeLink() {
 
 list.forEach((item) => (item.addEventListener('mouseover', activeLink)));
 
-const search = document.querySelector('.input-group input'),
-    table_rows = document.querySelectorAll('#omraDetailsTableBody tr'),
+const searc = document.querySelector('.input-group input'),
+    table_row = document.querySelectorAll('#omraDetailsTableBody tr'),
+    table_heading = document.querySelectorAll('thead th');
+
+// 1. Searching for specific data of HTML table
+searc.addEventListener('input', searchTabl);
+
+function searchTabl() {
+    table_row.forEach((row, i) => {
+        let table_data = row.textContent.toLowerCase(),
+            search_data = searc.value.toLowerCase();
+
+        row.classList.toggle('hide', table_data.indexOf(search_data) < 0);
+        row.style.setProperty('--delay', i / 25 + 's');
+    })
+
+    document.querySelectorAll('tbody tr:not(.hide)').forEach((visible_row, i) => {
+        visible_row.style.backgroundColor = (i % 2 == 0) ? 'transparent' : '#0000000b';
+    });
+}
+
+const search = document.querySelector('.input input'),
+    table_rows = document.querySelectorAll('#omraTable tr'),
     table_headings = document.querySelectorAll('thead th');
 
 // 1. Searching for specific data of HTML table
@@ -36,6 +57,7 @@ function searchTable() {
         visible_row.style.backgroundColor = (i % 2 == 0) ? 'transparent' : '#0000000b';
     });
 }
+
 
 // 2. Sorting | Ordering data of HTML table
 

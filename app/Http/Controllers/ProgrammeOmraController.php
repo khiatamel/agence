@@ -30,7 +30,7 @@ class ProgrammeOmraController extends Controller
         ]);
 
         ProgrammeOmra::create($request->all());
-        return redirect()->route('programme_omras.index')->with('success', 'Programme Omra created successfully.');
+        return redirect()->route('programme_omras.index')->with('success', 'Programme Omra a été créée avec succès.');
     }
 
     // Show the form for editing the specified resource.
@@ -58,7 +58,7 @@ class ProgrammeOmraController extends Controller
         $programmeOmra->compagne = $request->input('compagne');
         $programmeOmra->save();
 
-        return redirect()->route('programme_omras.index')->with('success', 'Programme updated successfully.');
+        return redirect()->route('programme_omras.index')->with('success', 'Programme Omra a été modifier avec succès.');
     }
     
 
@@ -66,6 +66,6 @@ class ProgrammeOmraController extends Controller
     public function destroy(ProgrammeOmra $programmeOmra)
     {
         $programmeOmra->delete();
-        return redirect()->route('programme_omras.index')->with('success', 'Programme Omra deleted successfully.');
+        return redirect()->route('programme_omras.index')->with('success', 'Programme Omra a été supprimer avec succès.');
     }
 }

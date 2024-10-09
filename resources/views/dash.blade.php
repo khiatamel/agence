@@ -8,45 +8,44 @@
     <link rel="icon" href="{{ asset('images/L1.png') }}" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-
-
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="{{ asset('css/dash.css') }}"/>
     
     <title>Sanhadja Voyage</title>
 </head>
+
 <body>
 
-	<div class="container">
-		<div class="navigation">
+<div class="container">
+	<div class="navigation">
 			<ul>
                 <div class='img'>
-				<img style="width:150px; height:80px; margin-top:-5px;margin-left:-5px;" src="../images/logoA.png" >
+				<img style="width:150px; height:80px; margin-top:-5px;margin-left:0px;" src="../images/logoA.png" >
                 </div>
-                <li>
-				<a href="{{ route('dash') }}">
-					<span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-					<span class="title">Tableau de bord</span>
+                <li class="activ">
+				<a href="{{ route('dash') }}" >
+					<span class="icon"><img src="images/kaaba.png" style="width:20px;"></span>
+					<span class="title">Omra</span>
 				</a>
 		</li>
 
         <li>
-				<a href="{{ route('calender') }}">
-					<span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+				<a href="{{ route('calender') }}" >
+					<span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
 					<span class="title">calendrier</span>
+				</a>
+		</li>
+        <li>
+				<a href="{{route('hotels.index') }}">
+					<span class="icon"><ion-icon name="business-outline"></ion-icon></span>
+					<span class="title">Hotels</span>
 				</a>
 		</li>
 
 		<li>
 				<a href="#">
-					<span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-					<span class="title">Omra</span>
-				</a>
-		</li>
-        <li>
-				<a href="#">
-					<span class="icon"><ion-icon name="chatbox-ellipses-outline"></ion-icon></span>
-					<span class="title">Hotels</span>
+					<span class="icon"><ion-icon name="logo-vimeo"></ion-icon></span>
+					<span class="title">Visa</span>
 				</a>
 		</li>
 
@@ -91,133 +90,141 @@
 		</ul>
 	</div>
 
-<div class="main">
-	<div class="topbar">
-		<div class="toggle">
-			<ion-icon name="menu-outline"></ion-icon>
-		</div>
-		<div class="search">
-			<label for="">
-				<input type="text" name="" id="" placeholder="search here">
-			<ion-icon name="search-outline"></ion-icon>
-			</label>
-		</div>
-		<div class="user">
-            <li class="navbar-item">
-                Admin : {{ Auth::user()->name }}     
-            </li>
-      </div>
-	</div>
-
-<div class="details">
-    <!-- Table with Omras -->
-
-
-<!-- Div to display Omra details when clicked -->
-<div class="recentOrders" id="omraDetails" >
-    <main class="table" id="customers_table">
-        <section class="table__header">
-            <h1>Les demandes</h1>
-            <div class="input-group">
-                <input type="search" placeholder="Search Data...">
-                <ion-icon name="search-outline"></ion-icon>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle">
+                <ion-icon name="menu-outline"></ion-icon>
             </div>
-            <!-- Filter Form -->
-           <!-- Filter Form -->
-<!-- Filter Form -->
-<form method="GET" action="{{ route('reservation_omras.inde') }}">
-    <select name="role" id="role">
-        <option value="all">All</option>
-        <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
-        <option value="client" {{ request('role') === 'client' ? 'selected' : '' }}>Client</option>
-        <option value="agence" {{ request('role') === 'agence' ? 'selected' : '' }}>Agence</option>
-    </select>
-    <!-- Champ caché pour l'Omra sélectionnée -->
-    <input type="hidden" name="selected_omra" value="{{ request('selected_omra') }}">
-    <button type="submit">Filter</button>
-</form>
+            <div class="omra-management-buttons">
+                <a href="{{ route('programme_omras.index') }}" class="topbar-btn">
+                    <ion-icon name="document-text-outline"></ion-icon>
+                    <span>Programmes</span>
+                </a>
+                <a href="{{route('omra.index')}}" class="topbar-btn">
+                    <ion-icon name="pricetag-outline"></ion-icon>
+                    <span>Offres</span>
+                </a>
+                <a href="" class="topbar-btn">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <span>Clients</span>
+                </a>
+            </div>
+            <div class="user">
+                <li class="navbar-item">
+                    Admin : {{ Auth::user()->name }}     
+                </li>
+        </div>
+        </div>
 
+        <div class="details">
+            <!-- Div to display Omra details when clicked -->
+            <div class="recentOrders" id="omraDetails" >
+                <main class="table" id="customers_table">
+                    <section class="table__header">
+                        <h1>Les demandes</h1>
+                        <div class="input-group">
+                            <input type="search" placeholder="Search Data...">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </div>
+                        <!-- Filter Form -->
+                        <form method="GET" action="{{ route('reservation_omras.inde') }}">
+                            <select name="role" id="role">
+                                <option value="all">All</option>
+                                <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="client" {{ request('role') === 'client' ? 'selected' : '' }}>Client</option>
+                                <option value="agence" {{ request('role') === 'agence' ? 'selected' : '' }}>Agence</option>
+                            </select>
+                            <!-- Champ caché pour l'Omra sélectionnée -->
+                            <input type="hidden" name="selected_omra" value="{{ request('selected_omra') }}">
+                            <button type="submit">Filter</button>
+                        </form>
+                    </section>
 
-        </section>
+                    <section class="table__body">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>N°</th>
+                                    <th>Nom Complet</th>
+                                    <th>Numéro Téléphone</th>
+                                    <th>PassePort</th>
+                                    <th>Photo</th>
+                                    <th id="trier">Hotel <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th>Age (Enfant)</th>
+                                    <th id="trier">Groupe <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th id="trier"> Statut <span class="icon-arrow">&UpArrow;</span></th>
+                                    <th> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody id="omraDetailsTableBody">
+                                <!-- Dynamically filled -->
+                                @php $index = 1; @endphp
+                                @foreach($reservation_omras as $reservation_omra)
+                                <tr>
+                                    <td>{{ $index++ }}</td>
+                                    <td>{{ $reservation_omra->nom }}</td>
+                                    <td>{{ $reservation_omra->numero }}</td>
+                                    <td><a href="{{ Storage::url($reservation_omra->passeport) }}" target="_blank">Voir le Passeport</a></td>
+                                    <td><a href="{{ Storage::url($reservation_omra->photo) }}" target="_blank">Voir la Photo</a></td>
+                                    <td>{{ $reservation_omra->hotel }}</td>
+                                    <td>{{ $reservation_omra->age }}</td>
+                                    <td>{{ $reservation_omra->group_name }}</td>
+                                    @if($reservation_omra->statut == 'accepté')
+                                        <td style="color: green;">{{ $reservation_omra->statut }}</td>
+                                    @elseif($reservation_omra->statut == 'refusé')
+                                        <td style="color: red;">{{ $reservation_omra->statut }}</td>
+                                    @else
+                                        <td style="color: orange;">{{ $reservation_omra->statut }}</td>
+                                    @endif
+                                    <td>
+                                        <!-- Accepter -->
+                                        <a href="{{ route('dash.accept', ['id' => $reservation_omra->id, 'selected_omra' => request('selected_omra')]) }}" style="color:green" class="icon-btn-A" title="Accepter">
+                                            <i class="fas fa-check-circle text-success"></i>
+                                        </a>
+                                    
+                                            <!-- Refuser -->
+                                        <a href="{{ route('dash.refuse', ['id' => $reservation_omra->id, 'selected_omra' => request('selected_omra')]) }}" style="color:red" class="icon-btn-R" title="Refuser">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </a>
+                                    </td>
 
-        <section class="table__body">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nom Complet</th>
-                        <th>Numéro Téléphone</th>
-                        <th>PassePort</th>
-                        <th>Photo</th>
-                        <th id="trier">Hotel <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Age (Enfant)</th>
-                        <th id="trier">Groupe <span class="icon-arrow">&UpArrow;</span></th>
-                        <th id="trier"> Statut <span class="icon-arrow">&UpArrow;</span></th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-                <tbody id="omraDetailsTableBody">
-                    <!-- Dynamically filled -->
-                    @foreach($reservation_omras as $reservation_omra)
-                    <tr>
-                        <td>{{ $reservation_omra->nom }}</td>
-                        <td>{{ $reservation_omra->numero }}</td>
-                        <td><a href="{{ Storage::url($reservation_omra->passeport) }}" target="_blank">Voir le Passeport</a></td>
-                        <td><a href="{{ Storage::url($reservation_omra->photo) }}" target="_blank">Voir la Photo</a></td>
-                        <td>{{ $reservation_omra->hotel }}</td>
-                        <td>{{ $reservation_omra->age }}</td>
-                        <td>{{ $reservation_omra->group_name }}</td>
-                        @if($reservation_omra->statut == 'accepté')
-                            <td style="color: green;">{{ $reservation_omra->statut }}</td>
-                        @elseif($reservation_omra->statut == 'refusé')
-                            <td style="color: red;">{{ $reservation_omra->statut }}</td>
-                        @else
-                            <td style="color: orange;">{{ $reservation_omra->statut }}</td>
-                        @endif
-                        <td>
-    <!-- Accepter -->
-    <a href="{{ route('dash.accept', ['id' => $reservation_omra->id, 'selected_omra' => request('selected_omra')]) }}" class="icon-btn-A" title="Accepter">
-        <i class="fas fa-check-circle text-success"></i>
-    </a>
+                                </tr>
+                                @endforeach
+                        
+                            </tbody>
+                        </table>
+                    </section>
+                </main>
+            </div>
 
-    <!-- Refuser -->
-    <a href="{{ route('dash.refuse', ['id' => $reservation_omra->id, 'selected_omra' => request('selected_omra')]) }}" class="icon-btn-R" title="Refuser">
-        <i class="fas fa-times-circle text-danger"></i>
-    </a>
-</td>
-
-                    </tr>
-                @endforeach
-            
-                </tbody>
-            </table>
-        </section>
-    </main>
-</div>
-
-<!-- Table with Omras -->
-<div class="recentCustomers">
-    <div class="cardHeader">
-        <h2>Omra</h2>
-    </div>
-    <table id="omraTable">
-        @foreach($omras as $omra)
-        <tr class="omra-row" data-id="{{ $omra->id }}" data-nom="{{ $omra->nom }}" data-compagne="{{ $omra->compagne }}">
-            <td width="60px">
-                <div class="imgBox">
-                    <img src="{{ asset('/storage/images/'.$omra->photo) }}" alt="">
+            <!-- Table with Omras -->
+            <div class="recentCustomers">
+                <div class="cardHeader">
+                    <h2>Omra</h2>
                 </div>
-            </td>
-            <td>
-                <h4>{{ $omra->nom }}</h4><span>{{ $omra->compagne }}</span>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-</div>
+                <div class="input">
+                        <input type="search" placeholder="Search Data...">
+                        <ion-icon name="search-outline"></ion-icon>
+                </div>
+                <table id="omraTable">
+                    @foreach($omras as $omra)
+                    <tr class="omra-row" data-id="{{ $omra->id }}" data-nom="{{ $omra->nom }}" data-compagne="{{ $omra->compagne }}">
+                        <td width="60px">
+                            <div class="imgBox">
+                                <img src="{{ asset('/storage/images/'.$omra->photo) }}" alt="">
+                            </div>
+                        </td>
+                        <td>
+                            <h4>{{ $omra->nom }}</h4><span>{{ $omra->compagne }}</span>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
 
+        </div>
+    </div>
 </div>
-</div>
-
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -274,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const detailsDiv = document.getElementById('omraDetails');
             detailsDiv.style.display = 'block';  // Afficher le div des détails
 
+            let index = 1;
             const tableBody = document.getElementById('omraDetailsTableBody');
             tableBody.innerHTML = ''; // Effacer le contenu précédent
 
@@ -286,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(reservation => {
                 tableBody.innerHTML += `
                     <tr>
+                        <td>${index++}</td>
                         <td>${reservation.nom}</td>
                         <td>${reservation.numero}</td>
                         <td><a href="${reservation.passeport_url}" target="_blank">Voir le Passeport</a></td>
@@ -335,16 +344,18 @@ document.querySelectorAll('.user-filter').forEach(filter => {
     filter.addEventListener('click', function(event) {
         event.preventDefault();
         const role = this.getAttribute('data-role');
-
+        
         fetch(`/reservations/filter/${role}`)
             .then(response => response.json())
             .then(data => {
                 const tbody = document.querySelector('#customers_table tbody');
                 tbody.innerHTML = '';
 
+                let index = 1;
                 data.reservations.forEach(reservation => {
                     tbody.innerHTML += `
                         <tr>
+                            <td>${ index++ }</td>
                             <td>${reservation.nom}</td>
                             <td>${reservation.numero}</td>
                             <td><a href="/storage/${reservation.passeport}" target="_blank">Voir le Passeport</a></td>
@@ -404,6 +415,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+
 </script>
 
  <!-- Inclusion du fichier JavaScript -->

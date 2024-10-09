@@ -7,6 +7,7 @@ use App\Http\Controllers\OmraController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReservationOmraController;
 use App\Http\Controllers\CommissionController;
+use App\Http\Controllers\ToastController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,7 @@ Route::get('/programme_omras', [ProgrammeOmraController::class, 'index'])->name(
 Route::resource('omras', OmraController::class);
 Route::get('omras/{id}/edit',  [OmraController::class, 'edit'])->name('omras.edit');
 Route::put('/omras/{id}', [OmraController::class, 'update'])->name('omras.update');
+Route::delete('/omras/{id}', [OmraController::class, 'destroy'])->name('omras.destroy');
 Route::get('/omras', [OmraController::class, 'index'])->name('omra.index');
 
 Route::put('/reservations/{id}/accept', [ReservationOmraController::class, 'accept'])->name('reservations.accept');
@@ -120,13 +122,21 @@ Route::put('/reservations/{id}/accept', [ReservationOmraController::class, 'acce
 Route::get('commissions/omra/{id}', [CommissionController::class, 'createForOmra'])->name('commissions.createForOmra');
 Route::post('commissions/store', [CommissionController::class, 'store'])->name('commissions.store');
 Route::delete('commissions/{id}', [CommissionController::class, 'destroy'])->name('commissions.destroy');
-Route::put('/commission/update', [CommissionController::class, 'update'])->name('commissions.update');
+Route::put('/commissions/{commission}', [CommissionController::class, 'update'])->name('commissions.update');
+
+//toast
+Route::get('/toasts', [ToastController::class, 'index'])->name('toasts.index');
+Route::post('/toasts/success', [ToastController::class, 'success'])->name('toasts.success');
+Route::post('/toasts/error', [ToastController::class, 'error'])->name('toasts.error');
+Route::post('/toasts/warning', [ToastController::class, 'warning'])->name('toasts.warning');
+Route::delete('/toasts/{id}', [ToastController::class, 'destroy'])->name('toasts.destroy'); // Ajout de la route de suppression
 
     //hotels
 Route::resource('hotels', HotelController::class);
 Route::get('hotels/create', [HotelController::class, 'create'])->name('hotels.create');
 Route::post('articles',  [HotelController::class, 'store'])->name('hotels.store');
 Route::get('hotels/{id}', [HotelController::class, 'show'])->name('hotels.show');
+Route::get('hotels', [HotelController::class, 'index'])->name('hotels.index');
 // Route pour afficher le formulaire de modification
 Route::get('hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
 // Route pour mettre à jour l'hôtel
@@ -141,7 +151,7 @@ Route::get('/AjouterOmra', function () {
 Route::get('/Agence', [OmraController::class, 'afficherAgence'])->name('Agence');
 Route::get('/ListReservation', [ReservationOmraController::class, 'afficherReservation'])->name('list.reservation');
 // 
-Route::middleware(['auth', 'role:admin'])->group(function() {
+Route::middleware(['auth', 'role:agence'])->group(function() {
     Route::get('/agence/reservations', [ReservationOmraController::class, 'viewAgencyReservations'])->name('agence.listReservations');
 });
 

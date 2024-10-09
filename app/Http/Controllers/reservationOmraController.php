@@ -165,7 +165,7 @@ public function viewAgencyReservations()
     $agence = auth()->user(); // This is the authenticated user (agency)
 
     // Ensure the user is an agency
-    if ($agence->role !== 'admin') {
+    if ($agence->role !== 'agence') {
         abort(403, 'Unauthorized');
     }
 

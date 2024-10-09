@@ -21,28 +21,34 @@
 </head>
 <body>
 
-	<div class="container">
-		<div class="navigation">
+<div class="container">
+  <div class="navigation">
 			<ul>
                 <div class='img'>
-				<img style="width:150px; height:80px; margin-top:-5px;margin-left:-5px;" src="../images/logoA.png" >
+				<img style="width:150px; height:80px; margin-top:-5px;margin-left:0px;" src="../images/logoA.png" >
                 </div>
-                <li>
-				<a href="{{ route('dash') }}">
-					<span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-					<span class="title">Tableau de bord</span>
+                <li >
+				<a href="{{ route('dash') }}" >
+					<span class="icon"><img src="images/kaaba.png" style="width:20px;"></span>
+					<span class="title">Omra</span>
 				</a>
 		</li>
 
-        <li>
-				<a href="{{ route('calender') }}">
-					<span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+        <li class="activ">
+				<a href="{{ route('calender') }}" >
+					<span class="icon"><ion-icon name="calendar-outline"></ion-icon></span>
 					<span class="title">calendrier</span>
+				</a>
+		</li>
+        <li >
+				<a href="{{route('hotels.index') }}">
+					<span class="icon"><ion-icon name="business-outline"></ion-icon></span>
+					<span class="title">Hotels</span>
 				</a>
 		</li>
 
 		<li>
-				<a href="{{ route('Aomra') }}">
+				<a href="#">
 					<span class="icon"><ion-icon name="people-outline"></ion-icon></span>
 					<span class="title">Omra</span>
 				</a>
@@ -75,30 +81,31 @@
 					<span class="title">billet</span>
 				</a>
 		</li>
-	<li>
-				<a href="#">
+	    <li>
+				<a href="{{ route('logout') }}" class="navbar-link logout-link" 
+                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 					<span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
 					<span class="title">Sign Out</span>
 				</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
 		</li>
 
 		</ul>
-		</div>
+	</div>
 
 <div class="main">
-	<div class="topbar">
+<div class="topbar">
 		<div class="toggle">
 			<ion-icon name="menu-outline"></ion-icon>
 		</div>
-		<div class="search">
-			<label for="">
-				<input type="text" name="" id="" placeholder="search here">
-			<ion-icon name="search-outline"></ion-icon>
-			</label>
-		</div>
+		
 		<div class="user">
-			<img src="https://randomuser.me/api/portraits/men/79.jpg" alt="userimage">
-		</div>
+            <li class="navbar-item">
+                Admin : {{ Auth::user()->name }}     
+            </li>
+      </div>
 	</div>
 
 <div class="details">
