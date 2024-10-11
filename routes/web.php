@@ -8,6 +8,10 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReservationOmraController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ToastController;
+use App\Http\Controllers\VisaController;
+use App\Http\Controllers\TypeVisaController;
+use App\Http\Controllers\DossierVisaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -141,6 +145,12 @@ Route::get('hotels', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
 // Route pour mettre à jour l'hôtel
 Route::put('hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
+
+//visa
+Route::resource('visas', VisaController::class);
+Route::resource('type-visas', TypeVisaController::class);
+Route::resource('dossier-visas', DossierVisaController::class);
+
 
 
 Route::get('/AjouterOmra', function () {

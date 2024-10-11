@@ -1,0 +1,454 @@
+/* Global styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 70%;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.details {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* Visa list */
+.visa-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.visa-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.visa-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.visa-card h2 {
+    font-size: 1.5rem;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+/* Type and dossier lists */
+.visa-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.visa-card li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.visa-card li strong {
+    color: #2c3e50;
+}
+
+.visa-card ul ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.visa-card ul ul li {
+    background-color: #ecf0f1;
+    margin: 5px 0;
+    padding: 8px;
+}
+
+/* Form styles */
+form {
+    margin-top: 20px;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+
+        .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(56, 73, 85); /* Couleur de fond (à adapter selon ton thème) */
+        padding: 10px 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour un effet 3D */
+        
+    }
+
+    /* Style de l'icône de menu */
+    .toggle {
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s ease; /* Effet de rotation au survol */
+    }
+
+    .toggle:hover {
+        transform: rotate(360deg); /* Rotation sur survol */
+    }
+
+    /* Style du texte utilisateur */
+    .user {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff; /* Couleur blanche pour contraster avec la barre */
+    }
+
+    .user li.navbar-item {
+        list-style: none; /* Enlever les puces du <li> */
+        margin-left: 10px; /* Un peu d'espace avant le texte */
+    }
+
+    .user li.navbar-item:before {
+        content: '\f2bd'; /* Icône d'utilisateur de Font Awesome */
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        margin-right: 8px;
+    }
+
+    /* Effets de survol pour l'utilisateur */
+    .user li.navbar-item:hover {
+        color: #c1e1e6; /* Couleur légèrement plus claire au survol */
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); /* Effet d'ombre subtile */
+    }
+
+    /* Media queries pour une meilleure réactivité */
+    @media (max-width: 768px) {
+        .topbar {
+            flex-direction: column; /* Empiler les éléments en mobile */
+            align-items: flex-start;
+        }
+
+        .user {
+            margin-top: 10px;
+        }
+    }
+        /* Style de la boîte de recherche */
+    .hotel-search {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* Masquer la liste des hôtels par défaut */
+    .hotel-checkboxe {
+        display: none;
+        opacity: 0;
+        max-height: 0;
+        transition: all 0.3s ease-in-out;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        position: absolute;
+        width: 100%;
+        max-height: 200px; /* Hauteur maximale avec défilement si trop d'éléments */
+        z-index: 1000;
+    }
+
+    /* Animation lors du focus sur le champ de recherche */
+    .hotel-search:focus + .hotel-checkboxe {
+        display: block;
+        opacity: 1;
+        max-height: 200px; /* On dévoile la hauteur maximale */
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Style pour les items des hôtels */
+    .hotel-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .hotel-item label {
+        margin-left: 8px;
+        font-size: 16px;
+    }
+
+    /* Style scrollbar si nécessaire */
+    .hotel-checkboxe::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .hotel-checkboxe::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+    /* Affiche la liste au survol */
+    .user-input-box:hover .hotel-checkboxe {
+        display: block;
+        opacity: 1;
+        max-height: 200px;
+    }
+
+    /* Style du conteneur principal */
+    .user-input-box {
+        position: relative;
+        margin-bottom: 5px;
+        width: 100%;
+        max-width: 400px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Style pour le label */
+    .user-input-box label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Style pour le champ de recherche */
+    .user-input-box input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 14px;
+        cursor: pointer; /* Pour indiquer que c'est cliquable */
+        transition: border 0.3s ease;
+    }
+
+    /* Changement de l'apparence à l'état focus */
+    .user-input-box input[type="text"]:focus {
+        border-color: #3498db;
+        cursor: text;
+    }
+
+    /* Conteneur des cases à cocher */
+    .hotel-checkboxes {
+        margin-top: 10px;
+        max-height: 200px; /* Limite la hauteur et rend la zone défilable */
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        display: none; /* Masqué par défaut */
+    }
+
+    /* Style des cases à cocher */
+    .hotel-checkboxes div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .hotel-checkboxes input[type="checkbox"] {
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .hotel-checkboxes label {
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    /* Option d'affichage dynamique */
+    .hotel-checkboxes.show {
+        display: block;
+    }
+
+    /* Style pour la barre de recherche avec la saisie autorisée */
+    #hotel-search {
+        cursor: text; /* Permet de saisir du texte */
+    }
+
+    /* Style pour chaque hôtel */
+    .hotel-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+    }
+
+    .hotel-item input[type="checkbox"] {
+        margin-right: 12px;
+    }
+
+    .hotel-item label {
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Style pour les barres de défilement */
+    .hotel-checkboxes::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .hotel-checkboxes::-webkit-scrollbar-thumb {
+        background-color: #3498db;
+        border-radius: 10px;
+    }
+
+
+    .hotel-item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+    }
+
+    .hotel-item input[type="checkbox"] {
+        margin-right: 10px;
+    }
+.table__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-bottom: 50px;
+}
+
+.container h1 {
+    font-size: 30px;
+    color: #2e7081;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+
+ .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: rgba(236, 236, 236, 0.555);
+    padding: 0 .8rem;
+    border-radius: 2rem;
+    box-shadow: 0 .1rem .4rem #0002;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+}
+
+ .input-group:hover {
+    width: 45%;
+    background-color: rgba(218, 217, 217, 0.555);
+    box-shadow: 0 .1rem .4rem #0002;
+}
+
+ .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+ .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: transparent;
+}
+
+/* Style the toggle button */
+.toggle-form-btn {
+    background-color: #2e7081;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.toggle-form-btn:hover {
+    background-color: #1f5163;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .visa-container {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .visa-card {
+        padding: 15px;
+    }
+
+    form button {
+        font-size: 1rem;
+    }
+}
+.visa{
+    border-radius: 30px;
+    background-color: #c7c6c6;
+    border: black;
+    padding: 20px;
+    margin-bottom: 10px;
+}
