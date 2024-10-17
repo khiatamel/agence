@@ -7,141 +7,58 @@
       
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="{{ asset('css/rsVisa.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
 
   </head>
   <body>
   
-    <div class="titre"><h1>Réservation</h1></div>
-    <div class="container">
-      <h1 class="form-title">Personnes 01</h1>
-      <form action="#">
-        <div class="main-user-info">
-          <div class="user-input-box">
-            <label for="fullName">Nom</label>
-            <input type="text"
-                    id="Nom"
-                    name="Nom"
-                    placeholder="Enter le nom"/>
-          </div>
-          <div class="user-input-box">
-            <label for="Prenom">Prenom</label>
-            <input type="text"
-                    id="Prenom"
-                    name="Prenom"
-                    placeholder="Enter le prenom"/>
-          </div>
-          
-          <div class="user-input-box">
-            <label for="numeroTéléphone">Numéro Téléphone</label>
-            <input type="text"
-                    id="numeroTéléphone"
-                    name="numeroTéléphone"
-                    placeholder="Enter le numéro téléphone"/>
-          </div>
-          <div class="user-input-box">
-            
-          </div>
-          <div class="user-input-box">
-            <label for="password">PassePort(Scanner)</label>
-            <input type="file" 
-                    id="passeport" 
-                    name="passport" 
-                    placeholder="Enter Password"
-                    accept="image/*,application/pdf" required>
-          </div>
-          <div class="user-input-box">
-            <label for="password">Photo(Scanner)</label>
-            <input type="file" 
-                    id="photo" 
-                    name="photo" 
-                    placeholder="Enter photo"
-                    accept="image/*,application/pdf" required>
-          </div>
-        </div>
-        <div class="gender-details-box">
-          <span class="gender-title">Genre</span>
-          <div class="gender-category">
-            <input type="radio" name="gender" id="male">
-            <label for="male">Homme</label>
-            <input type="radio" name="gender" id="female">
-            <label for="female">Femme</label>
-           
-          </div>
-        </div>
-      </form>
+  <form action="{{ route('reservation.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
-    <div class="container">
-      <h1 class="form-title">Personnes 02</h1>
-      <form action="#">
-        <div class="main-user-info">
-          <div class="user-input-box">
-            <label for="fullName">Nom</label>
-            <input type="text"
-                    id="Nom"
-                    name="Nom"
-                    placeholder="Enter le nom"/>
-          </div>
-          <div class="user-input-box">
-            <label for="Prenom">Prenom</label>
-            <input type="text"
-                    id="Prenom"
-                    name="Prenom"
-                    placeholder="Enter le prenom"/>
-          </div>
-          
-          <div class="user-input-box">
-            <label for="numeroTéléphone">Numéro Téléphone</label>
-            <input type="text"
-                    id="numeroTéléphone"
-                    name="numeroTéléphone"
-                    placeholder="Enter le numéro téléphone"/>
-          </div>
-          <div class="user-input-box">
-            
-          </div>
-          <div class="user-input-box">
-            <label for="password">PassePort(Scanner)</label>
-            <input type="file" 
-                    id="passeport" 
-                    name="passport" 
-                    placeholder="Enter Password"
-                    accept="image/*,application/pdf" required>
-          </div>
-          <div class="user-input-box">
-            <label for="password">Photo(Scanner)</label>
-            <input type="file" 
-                    id="photo" 
-                    name="photo" 
-                    placeholder="Enter photo"
-                    accept="image/*,application/pdf" required>
-          </div>
-        </div>
-        <div class="gender-details-box">
-          <span class="gender-title">Genre</span>
-          <div class="gender-category">
-            <input type="radio" name="gender" id="male">
-            <label for="male">Homme</label>
-            <input type="radio" name="gender" id="female">
-            <label for="female">Femme</label>
-           
-          </div>
-        </div>
-        
-      </form>
-    </div>
-    <div class="container">
+@endif
+<input type="hidden" name="demande_visa_id" value="{{ $demandeVisa->id }}">
 
-      <form action="#">
-        <div class="main-user-info">
-          <div class="user">
-             <span class="prix-totale">Prix Totale : </span>
-             <span class="prix">500000DA</span>
-          </div>
+@if($dossiers->isEmpty())
+        <p>Aucun dossier disponible pour le type de visa sélectionné.</p>
+    @else
+        @for($i = 1; $i <= $totalPersonnes; $i++)
+            <div class="container max-w-lg">
+                <h3 class="form-title">Personne {{ $i }}</h3>
+                 <div>
+                    <label class="block mb-2 text-lg font-medium text-white dark:text-white" for="nom_{{ $i }}">Nom complet :</label>
+                    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                           type="text"
+                           name="noms[{{ $i }}]" 
+                           id="nom_{{ $i }}" required>
+                </div>
+                @foreach($dossiers as $dossier)
+                    <div>
+                        <label class="block mb-2 text-lg font-medium text-white dark:text-white" for="fichier_{{ $i }}_{{ $dossier->id }}">
+                            {{ $dossier->dossier }} :
+                        </label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                               type="file" 
+                               name="fichiers[{{ $i }}][{{ $dossier->id }}]" 
+                               id="fichier_{{ $i }}_{{ $dossier->id }}" required>
+                    </div>
+                @endforeach
+            </div>
+        @endfor
+    @endif
+    <button type="submit" class="bg-blue-500 text-white p-2 rounded">Enregistrer la réservation</button>
+</form>
 
-        <div class="form-submit-btn">
-          <input type="submit" value="Confirmer la réservation">
-        </div>
-      </form>
-    </div>
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
   </body>
 </html>

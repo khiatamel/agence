@@ -43,7 +43,7 @@
 		</li>
 
 		<li>
-				<a href="#">
+				<a href="{{route('admin.reservation.index') }}">
 					<span class="icon"><ion-icon name="logo-vimeo"></ion-icon></span>
 					<span class="title">Visa</span>
 				</a>

@@ -133,7 +133,7 @@
               <nav class="navbar-menu">
                 <ul>
                 <li><a href="{{ route('omra') }}">Omra</a></li>
-                  <li><a href="{{ route('visa')}}">Visa</a></li>
+                  <li><a href="{{ route('demandeVisa.create')}}">Visa</a></li>
                   <li><a href="{{ route('hotel')}}">Hotels</a></li>
                   <li><a href="{{ route('bateau')}}">Bateau</a></li>
                   <li><a href="{{ route('assurance')}}">Assurance</a></li>

@@ -11,7 +11,9 @@ use App\Http\Controllers\ToastController;
 use App\Http\Controllers\VisaController;
 use App\Http\Controllers\TypeVisaController;
 use App\Http\Controllers\DossierVisaController;
-
+use App\Http\Controllers\DemandeVisaController;
+use App\Http\Controllers\ReservationVisaController;
+use App\Http\Controllers\AdminReservationVisaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,6 +153,33 @@ Route::resource('visas', VisaController::class);
 Route::resource('type-visas', TypeVisaController::class);
 Route::resource('dossier-visas', DossierVisaController::class);
 
+Route::get('/demande-visa/create', [DemandeVisaController::class, 'create'])->name('demandeVisa.create');
+// Route pour soumettre le formulaire de demande de visa
+Route::post('/demande-visa/store', [DemandeVisaController::class, 'store'])->name('demandeVisa.store');
+// Route pour afficher toutes les demandes de visa (admin ou gestionnaire)
+Route::get('/demandes-visa', [DemandeVisaController::class, 'index'])->name('demandeVisa.index');
+// Route pour afficher une demande de visa spécifique (optionnel)
+Route::get('/demande-visa/{id}', [DemandeVisaController::class, 'show'])->name('demandeVisa.show');
+// Route pour supprimer une demande de visa (optionnel pour l'admin)
+Route::delete('/demande-visa/{id}', [DemandeVisaController::class, 'destroy'])->name('demandeVisa.destroy');
+// Route pour récupérer les types de visa selon la destination
+Route::get('/types-visa/{destination}', [DemandeVisaController::class, 'getTypesVisa']);
+// Route pour afficher la page de réservation avec les blocs
+Route::get('/reservation/{demandeVisa}', [DemandeVisaController::class, 'showReservationForm'])->name('reservation.show');
+
+//Reservation_Visa
+Route::get('/reservation/{demandeVisaId}', [ReservationVisaController::class, 'showReservationForm'])->name('reservation.form');
+Route::post('/reservation/store', [ReservationVisaController::class, 'storeReservation'])->name('reservation.store');
+//Reservation_Visa_Admin
+// View all reservations
+Route::get('admin/reservations', [AdminReservationVisaController::class, 'index'])->name('admin.reservation.index');
+// Edit reservation person
+Route::get('admin/reservation/{id}/edit', [AdminReservationVisaController::class, 'edit'])->name('admin.reservation.edit');
+// Update reservation person
+Route::put('/admin/reservation/update/{id}', [AdminReservationVisaController::class, 'update'])->name('admin.reservation.update');
+// Delete reservation person
+Route::delete('admin/reservation/{id}', [AdminReservationVisaController::class, 'destroy'])->name('admin.reservation.delete');
+Route::get('/admin/reservation/edit-form/{id}', [AdminReservationController::class, 'editForm'])->name('admin.reservation.editForm');
 
 
 Route::get('/AjouterOmra', function () {

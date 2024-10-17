@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reserva_visas', function (Blueprint $table) {
+        Schema::create('demande_visas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('num');
-            $table->unsignedBigInteger('id_dossier');
-            $table->string('statut');
-            $table->foreign('id_dossier')->references('id')->on('dossier_visas')->onDelete('cascade');
+            $table->foreignId('type_visa_id')->constrained('type_visas')->onDelete('cascade');
+            $table->string('destination');
+            $table->integer('nb_adultes');
+            $table->integer('nb_enfants');
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reserva_visas');
+        Schema::dropIfExists('demande_visas');
     }
 };
